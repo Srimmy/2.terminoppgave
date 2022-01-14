@@ -1,0 +1,14 @@
+CREATE VIEW liktebilderView as SELECT bilder.id, liktebilder.username as liker, bilder.brukernavn as brukernavn, bilder.Path, liktebilder.dato as date from liktebilder
+JOIN bilder on liktebilder.likedPicId = bilder.id where liktebilder.likedPicId = bilder.id;
+
+CREATE TABLE users (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+
+insert into liktebilder(username, likedPicId) VALUES ('asd', '16');
+Kan endre sharePic og upload pfp til å være samme script men at 
+at begge bare sender rooten de vil ha slik at koden funker for alle uploads.
