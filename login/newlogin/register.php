@@ -83,6 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input class="input" type="password" name="password" placeholder="Password">
                 <input class="input" type="password" name="confirmPassword" placeholder="Confirm password">
                 <input class="input submit" type="submit" value="Register">
+                <p> <?php echo $username_err;?></p>
             </div>
         </div>
         <div class="register gap ">

@@ -36,3 +36,5 @@ personven
 gdpr
 opphavsred
 lovdata som søkefelt
+
+Gjør at når du opploader bilder så blir det enten laget en folder som er brukernavnet ditt og hvis det finnes så legges det inn der.
