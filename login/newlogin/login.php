@@ -11,8 +11,8 @@ $login_err = "";
 
 //hvis noen har brukt formen i html
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    $username = mysqli_real_escape_string($link, $_POST['username']);
+    $password = mysqli_real_escape_string($link, $_POST['password']);
     //hvis det begge er fyllt
     if (!empty($username) && !empty($password)) {
         $stmt = "SELECT * FROM users where username = '$username'";

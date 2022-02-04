@@ -17,9 +17,9 @@ $username_err = $password_err = $valid_err = $upload_err = "";
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
     if (isset($_POST['changeUser'])) {
         //Setter som variabler
-        $newUsername = $_POST['username'];
-        $password = $_POST['password'];
-        $newPassword = $_POST['newPassword'];
+        $newUsername = mysqli_real_escape_string($link, $_POST['username']);
+        $password = mysqli_real_escape_string($link, $_POST['password']);
+        $newPassword = mysqli_real_escape_string($link, $_POST['newPassword']);
         //feilsøking i brukernavn
         if (empty($_POST['username'])) {
             $username_err = "Please enter a username.";

@@ -5,11 +5,14 @@ $username_err = $password_err = $confirmPassword_err = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //Setter som variabler
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    //mysqli real escape string gjør at special characters som ' blir endret slik at man ikke kan injecte inn i sql.
+    $username = mysqli_real_escape_string($link, $_POST['username']);
+    $password = mysqli_real_escape_string($link, $_POST['password']);
+    $confirmPassword = mysqli_real_escape_string($link, $_POST['confirmPassword']);
     //feilsøking i brukernavn
     if (empty($_POST['username'])) {
         $username_err = "Please enter a username.";
+        //sikkerhet slik at man ikke kan injecte også, hvis man kan legge til ' kan man lage kode selv.
     } else if (!preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST['username']))) {
         $username_err = "Username can only contain letters, numbers and underscores.";
     } else {
@@ -21,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else { //Ser om passord er gyldig
                 if (empty($_POST['password']) || empty($_POST['confirmPassword'])) {
                     $password_err = "Please enter a password";
-                } else if (!($_POST['password'] === $_POST['confirmPassword'])) {
+                } else if (!($password === $confirmPassword)) {
                     $password_err = "Password does not match.";
                 } else {
                     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
