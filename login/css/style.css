@@ -1,0 +1,477 @@
+* {
+    color: #555555;
+}
+/* navbar */
+body{
+    margin: 0;
+    padding: 0;
+    background-color: rgb(245, 245, 245);
+    font: 14px sans-serif;
+    text-align: center;
+}
+tr {
+    border: 1px black solid
+}
+.shadow{
+    box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.38);
+}
+.navbar {
+    position: fixed;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 5px;
+    padding-top: 10px;
+    height: 55px;
+    z-index: 1;
+    border-bottom: #d3d3d3 1px solid;
+}
+.navbar-icon {
+    width: 40px;
+}
+.left-navbar {
+    margin-left: 20%;
+}
+.right-navbar {
+    position: absolute;
+    right: 0;
+    margin-right: 20%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.menu {
+    cursor: pointer;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 15px;
+}
+.whitespace {
+    height: 100px;
+    width: 100%;
+}
+#search{
+    background-color:#e4e4e4;
+    border-radius: 10px;
+    border: #b9b9b9 1px solid;
+    height: 40px;
+    display: flex;
+    margin-left: 10%;
+
+}
+.search {
+    padding-top: 10px;
+    background-color:#e4e4e4;
+    -webkit-appearance: none;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    height: 15px;
+    border-radius: 10px;
+    border: none;
+    height: auto;
+    font-size: 16px;
+}
+.searchText::placeholder {
+    font-size: 13px;
+}
+.søkeBildet {
+    width: 40px;
+    height: 26px;
+    margin: auto;
+}
+#pfpRadius {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: solid #d3d3d3 1px;
+    overflow: hidden;
+    background-color: white;
+    margin: auto;
+    margin-top: 10px;
+}
+/* en av "de"*/
+.pfpRadius {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: solid #d3d3d3 1px;
+    overflow: hidden;
+    background-color: white;
+    margin: auto;
+    margin-top: 10px;
+}
+.pfpRadius:hover {
+    cursor: pointer;
+}
+.dropContainer {
+    padding-top: .5em;
+    padding-bottom: .5em;
+    flex-direction: column;
+    display: flex;
+}
+.dropElement {
+    padding: 0.5em;
+    padding-right: 2em;
+    padding-left: 2em;
+    text-align: left;
+    font-size: 14px;
+}
+.dropElement:nth-child(2) {
+    border-bottom: 1px #d3d3d3 solid;
+}
+#pfpRadius:hover {
+    cursor: pointer;
+}
+
+#dropDown {
+    flex-direction: column;
+    display: none;
+    position: absolute;
+    background-color: white;
+    right: 0;
+    margin-top: 189px;
+    z-index: 1;
+    
+}
+.successful {
+    color: #54f054;
+    font-weight: normal;
+}
+
+.logo {
+    width: 75px;
+}
+.profilBildet {
+    width: 30px;
+    display: inline-block;
+}
+
+span {
+    color: #111111;
+    font-weight: bolder;
+}
+.bilder {
+    width: 355px;
+    height: 200px;
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+    border: 1px solid rgb(0,0,0, 0.3);
+    transition: 0.4s ease;
+    overflow: hidden;
+    
+
+}
+
+.middle{
+    text-align: center;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20%;
+
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-align: center;
+    position: relative;
+    padding-bottom: 30px;
+    
+}
+.containerBody {
+    width: 60%;
+    margin: auto;
+    
+}
+#pong {
+    text-align: left;
+    margin: auto;
+    justify-content: space-between;
+}
+div, h1 {
+    font-size: 20px;
+}
+.note {
+    font-size: 12px;
+}
+.profileNote {
+    width: 30%;
+    text-align: left;
+    margin-left: 10%;
+
+}
+td, th {
+    padding: 8px;
+    border-collapse: collapse;
+    border: #555555 solid 1px;
+    width: 100%;
+
+}
+table {
+    justify-content: left;
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.bigPfpRadius {
+    background-color: white;
+    width: 15vh;
+    height: 15vh;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-left: 10%;
+    border: 1px #d3d3d3 solid;
+}
+
+.bigPfp {
+    width: 100%;
+}
+.blackbox {
+    opacity: 0;
+    background-color: black;
+    position: absolute;
+    width: 355px;
+    height: 200px;
+    transition: 0.1s;
+
+}
+.blackbox:hover {
+   opacity: 0.5;
+}
+
+.description {
+    margin-left: 20%;
+    text-align: left;
+}
+
+.inline {
+    display: flex;
+    flex-direction: row;
+}
+.column {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+div label {
+    font-size: 16.5px;
+}
+.edit {
+    position: absolute;
+    border: 1px solid #d3d3d3;
+    padding: 0.2em;
+    margin-left: 30px;
+    margin-top: 30px;
+    font-size: 15px;
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+}
+#likedOrOwn {
+    margin-left: 130px;
+}
+.edit:hover {
+    text-decoration: none;
+}
+#gameScreen {
+    border: 1px solid black;
+}
+
+.edit:hover {
+    cursor: pointer;
+}
+
+#highscore {
+    display: none;
+}
+
+.center {
+    text-align: center;
+    justify-content: center;
+    margin: auto;
+}
+.underline {
+    border-bottom: #d3d3d3 1px solid;
+}
+#highscoreTable tr:nth-child(even){
+    background-color: #e7e7e7;
+}
+
+#highscoreTable tr:hover {background-color: #ddd;}
+
+.register {
+    border: 1px #d3d3d3 solid;
+    background-color: white;
+    margin: auto;
+    width: 384px; /*samme som width 20%*/
+
+}
+.input {
+    width: 55%;
+    -webkit-appearance: none;
+    margin: 5px;
+    border: 1px solid #d3d3d3;
+    outline: none;
+    height: 30px;
+    border-radius: 4px;
+}
+.submit {
+    width: 56.5%;
+    border: none;
+    background-color: #0095f6;
+    color: white;
+    border-radius: 4px;
+}
+#pfpSubmit {
+    width: 51%;
+}
+input[type = "text"]::placeholder, input[type = "password"]::placeholder{
+    font-size: 12px;
+}
+input[type = "submit"]:hover {
+    background-color: #0483d8;
+    cursor: pointer;
+}
+.inputDiv {
+    margin: 5%;
+}
+.gap {
+    margin-top: 20px;
+}
+.link {
+    -webkit-appearance: none;
+    color: #0095f6;
+    text-decoration: none;
+}
+.profileEdit {
+    margin: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+.file {
+    margin-left: 15%;
+}
+#editPfp {
+    margin-left: 30%;
+}
+#profileSubmit {
+    width: 59%;
+    margin-left: -0.1%;
+}
+#invisable {
+    display: none;
+}
+.invisable {
+    display: none;
+}
+.innlegg {
+    background-color: white;
+    width: 600px;
+    margin: auto;
+    margin-top: 30px;
+    overflow: hidden;
+    border: 1px solid #d3d3d3;
+}
+.profilInnlegg {
+    text-align: left;
+    margin-left: 20px;
+}
+.alignLeft {
+    text-align: left;
+}
+.row {
+    flex-direction: row;
+    display: flex;
+}
+.bildetOverflow {
+    background-color: white;
+    height: 500px;
+    overflow: hidden;
+}
+.bildetInnlegg {
+    width: 100%;
+}
+.addComment {
+    width: 100%;
+    border-top: 1px solid #d3d3d3;
+}
+.newComment {
+    width: 80%;
+    border: none;
+    padding: 12px;
+    margin-left: 10px;
+    outline: none;
+}
+.brukerBildet {
+    position: absolute;
+    margin-left: 60px;
+    margin-top: 15px;
+    color: black;
+}
+input[type = "submit"]:disabled {
+    background-color: #d3d3d3;
+}
+.kommentarer {
+    height: 50px;
+}
+
+/* veldig repetetiv kode rn*/
+.kommentar {
+    position: absolute;
+    font-size: 15px;
+    margin-left: 40px;
+}  
+
+.kommentarPfp {
+    width: 20px;
+    display: inline-block;
+}
+.kommentarPfpRadius {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: solid #d3d3d3 1px;
+    overflow: hidden;
+    background-color: white;
+    margin: auto;
+    margin-left: 10px;
+    cursor: pointer;
+    position: absolute;
+    margin-top: 13px;
+
+}
+.pointer {
+    cursor: pointer;
+}
+.hjerte {
+    width: 30px;
+    margin: 10px
+
+}
+
+/*chat */
+.inbox {
+    width: 25%;
+    height: 500px;
+
+}
+.pointer:hover{
+    cursor: pointer;
+}
+
+
+
+
+
