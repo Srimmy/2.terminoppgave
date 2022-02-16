@@ -471,6 +471,17 @@ input[type = "submit"]:disabled {
     cursor: pointer;
 }
 
+/* search */
+
+.result{
+    height: 200px;
+    width: 100%;
+    display: flex;
+}
+.result:hover{
+    background-color: rgb(207, 207, 207, 0.4);
+}
+
 
 
 

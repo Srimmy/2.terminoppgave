@@ -51,3 +51,4 @@ Bruk websocket for å oppdatere siden uten å måtte refreshe
 
 se vurderings matrise
 sett opp mer odkumentasjon som brukere til sql (muligens passord)
+Når brukere slettes legger du til en verdi i tabellen der det står "deleted", dermed kan du ta en if statement select * from users where !deleted" eller noe 
