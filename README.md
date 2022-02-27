@@ -1,4 +1,7 @@
 # Terminoppgave Vg2 //  Utvikles helt til sommer
+
+VIKTIG: index.php er ikke lagt til i root folderen ennå, den er lagt i login/browse/index.php.
+
 Prosjektet: Lage en web applikasjon der man kan dele bilder og spille spill. Nettstedet skal kunne åpnes ved å skrive inn en ip addresse på Kuben.It nettet. På nettleseren skal du kunne logge på en bruker der passordet blir kryptert i databasen. På nettsiden skal du kunne sende melinger til de du vil og se på de nyeste bildene som blir lagt ut.
 
 Kryssliste for prosjekt
