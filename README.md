@@ -15,4 +15,7 @@ Kryssliste for prosjekt
 * fjerne root fra mysql og virtuelle maskiner
 * ~~legge til lik og kommentar funksjon~~
 * ~~lagt til måte å legge ut bilder på slik at det blir lagret på samme maskin som apache2~~
+* legge til ticketing system for brukerstøtte siden applikasjonen foreløpig mangler slike funksjoner
+* legge til epost slik at jeg kan automatisere en "glemt passord".
+* se gjennom lover og regler: personvern, gdpr (hva skjer hvis nettsiden blir medium for terrorister?)
 * flere ideer er skrevet i login/STUCK.txt
