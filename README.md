@@ -12,4 +12,4 @@ Kryssliste for prosjekt
 * fjerne root fra mysql og virtuelle maskiner
 * ~~legge til lik og kommentar funksjon~~
 * ~~lagt til måte å legge ut bilder på slik at det blir lagret på samme maskin som apache2~~
-* flere ideer er skrevet
+* flere ideer er skrevet i login/STUCK.txt
