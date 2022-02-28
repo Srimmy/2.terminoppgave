@@ -19,7 +19,7 @@ Sette opp på xampp:
     *Skriv inn 'CREATE DATABASE users;' og trykk 'go' nede høyre hjørne.
     *Klipp all infirmasjonen i 'users.sql' filen og lim det inn det i den samme 'sql' tabben som i stad og trykk go.
         *I noen versioner av mysql må man skrive inn "use users;" før du kopierer og limer inn.
-    *For å åpne prosjektet kan du nå skrive 'localhost/2.terminoppgave' i skrivefeltet på nettleseren din, merk deg at dette må være URL skrive feltet.
+    *For å åpne prosjektet kan du nå skrive 'localhost/2.terminoppgave-main' i skrivefeltet på nettleseren din, merk deg at dette må være URL skrive feltet.
 
 
 Kryssliste for prosjekt
