@@ -36,4 +36,4 @@
 * legge til ticketing system for brukerstøtte siden applikasjonen foreløpig mangler slike funksjoner
 * legge til epost slik at jeg kan automatisere en "glemt passord".
 * se gjennom lover og regler: personvern, gdpr (hva skjer hvis nettsiden blir medium for terrorister?)
-* flere ideer er skrevet i login/STUCK.txt
+* flere ideer er skrevet i root/STUCK.txt
