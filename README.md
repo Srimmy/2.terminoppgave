@@ -4,12 +4,13 @@ VIKTIG: index.php er ikke lagt til i root folderen ennå, den er lagt i login/br
 
 Prosjektet: Lage en web applikasjon der man kan dele bilder og spille spill. Nettstedet skal kunne åpnes ved å skrive inn en ip addresse på Kuben.It nettet. På nettleseren skal du kunne logge på en bruker der passordet blir kryptert i databasen. På nettsiden skal du kunne sende melinger til de du vil og se på de nyeste bildene som blir lagt ut.
 
-Må ha for å sette opp 
-    * Mysql
-    * Php 
-    * phpmyadmin
-    * apache2 
-Alt dette og mer finnes i xampp: https://www.apachefriends.org/download.html
+Må ha for å sette opp:
+* Mysql
+* Php 
+* phpmyadmin
+* apache2
+
+Anbefaler å laste ned xampp fordi da lastes alt ned på likt: https://www.apachefriends.org/download.html
 
 Sette opp på xampp:
     *Extract alle filene i zip mappen i 'C:\xampp\htdocs\dashboard'
