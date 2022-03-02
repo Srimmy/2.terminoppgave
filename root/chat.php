@@ -24,13 +24,11 @@ if ($result = mysqli_query($link, $stmt)) {
         <div class="left-navbar">
             <img src="../htmlBilder/logo.png" alt="logo" class="logo">
         </div>
-        <form method="GET" class="row" action="search.php">
-            <div id="search">
-                <img src="../htmlBilder/søke.png" class="søkeBildet" alt="">
+                <form method="GET" class="row searchForm"  action='search.php'>
+            <div id="search" style="width: 15vw">
+                <img src="../htmlBilder/søke.png" id="søkeBildet" alt="">
                 <input class="search" id="searchText" name="k" type="text" class="search" placeholder="Search">
             </div>
-
-            <input type="submit">
         </form>
         <div class="right-navbar">
             <a class="menu" href="../browse/following.php"><img class="navbar-icon" src="../htmlBilder/house.png" alt="home"></a>

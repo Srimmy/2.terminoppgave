@@ -70,13 +70,11 @@ if (isset($_POST['like'])) {
         <div class="left-navbar">
             <img src="../htmlBilder/logo.png" alt="logo" class="logo">
         </div>
-        <form method="GET" class="row" action="search.php">
-            <div id="search">
-                <img src="../htmlBilder/søke.png" class="søkeBildet" alt="">
+                <form method="GET" class="row searchForm"  action='search.php'>
+            <div id="search" style="width: 15vw">
+                <img src="../htmlBilder/søke.png" id="søkeBildet" alt="">
                 <input class="search" id="searchText" name="k" type="text" class="search" placeholder="Search">
             </div>
-
-            <input type="submit">
         </form>
         <div class="right-navbar">
             <a class="menu" href="../browse/following.php"><img class="navbar-icon" src="../htmlBilder/house-reverse.png" alt="home"></a>
@@ -179,7 +177,7 @@ if (isset($_POST['like'])) {
                 }
                 $skrivKommentar = "
                     <div class = 'addComment alignLeft'>  
-                        <form method='POST' action='kommentar.php'>
+                        <form method='POST' action='../process/kommentar.php'>
                             <input class = 'newComment' onkeypress='test($innleggTall)' type='text' name = 'newComment' placeholder='Add a comment..'>
                             <input class = 'invisable' type='text' name = 'bildeId' value = '$bildetId'>
                             <input type = 'submit' name = 'submitComment' value = 'Post';>

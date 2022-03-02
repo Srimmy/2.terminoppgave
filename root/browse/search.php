@@ -1,5 +1,6 @@
 <?php
 require_once "../process/config.php";
+session_start();
 
 //search engine
 if (isset($_GET['k']) && $_GET['k'] != '') {
@@ -29,7 +30,7 @@ if (isset($_GET['k']) && $_GET['k'] != '') {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
-    <title>Results for <?php echo $k ?></title>
+    <title>Results for <?php echo ' '.$k ?></title>
 </head>
 
 <body>
@@ -37,13 +38,11 @@ if (isset($_GET['k']) && $_GET['k'] != '') {
         <div class="left-navbar">
             <img src="../htmlBilder/logo.png" alt="logo" class="logo">
         </div>
-        <form method="GET" class="row" action="search.php">
-            <div id="search">
-                <img src="../htmlBilder/søke.png" class="søkeBildet" alt="">
+        <form method="GET" class="row searchForm"  action='search.php'>
+            <div id="search" style="width: 15vw">
+                <img src="../htmlBilder/søke.png" id="søkeBildet" alt="">
                 <input class="search" id="searchText" name="k" type="text" class="search" placeholder="Search">
             </div>
-
-            <input type="submit">
         </form>
         <div class="right-navbar">
             <a class="menu" href="../browse/following.php"><img class="navbar-icon" src="../htmlBilder/house.png" alt="home"></a>
@@ -70,12 +69,21 @@ if (isset($_GET['k']) && $_GET['k'] != '') {
         if ($result = mysqli_query($link, $stmt)) {
             if ($result_num = mysqli_num_rows($result)) {
                 if ($result_num > 0) {
-                    print 'Your search for <i> ' . $k . '</i> <hr /> <br/>';
+                    print 'Your search for&#160;<i> ' .$k. '</i> <hr /> <br/>';
                     print '<div class = ""><b><u>' . $result_num . '</u></b> results found</div>';
                     while ($row = mysqli_fetch_assoc($result)) { //henter all dataen
                         $brukernavn = $row['username'];
                         $profilePic = $row['profilePicPath'];
-                        $bruker = "<div class = 'result' onClick=sendTilProfil('$profilePic')> <div class = 'bigPfpRadius' ><img class = 'bigPfp' src=" . $profilePic . " alt='$brukernavn'> </div><h2> $brukernavn </h2></div>";
+                        $bruker ="  <div class = 'result'  onClick=sendTilProfil('$brukernavn')>
+                                        <div class = 'bigPfpRadius' >
+                                            <img class = 'bigPfp'  src=" . $profilePic . " alt='$brukernavn'> 
+                                        </div>
+                                        <div class='column brukerSøk'>
+                                            <h2 class = 'bruker'> $brukernavn </h2>
+                                            <h2 class='desc light'> cap for nå</h2>
+                                        </div>
+                                        
+                                    </div>";
                         echo $bruker;
                     }
                 } else {
@@ -84,10 +92,13 @@ if (isset($_GET['k']) && $_GET['k'] != '') {
             }
         } else {
             print(mysqli_error($link));
-        } ?>
+        }
+
+         ?>
     </div>
+    <div id="invisable"></div>
 
-
+        <script src="../script/ui.js"> </script>
 </body>
 
 </html>

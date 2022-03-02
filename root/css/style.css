@@ -1,5 +1,18 @@
 * {
     color: #555555;
+    transition: 0.4s;
+    scroll-behavior: smooth;
+}
+::root {
+    --search: #e4e4e4;
+    --border: #d3d3d3;
+
+}
+*{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+h2 {
+    font-weight: 500;
 }
 /* navbar */
 body{
@@ -27,7 +40,7 @@ tr {
     padding-top: 10px;
     height: 55px;
     z-index: 1;
-    border-bottom: #d3d3d3 1px solid;
+    border-bottom: #d3d3d3  1px solid;
 }
 .navbar-icon {
     width: 40px;
@@ -53,18 +66,21 @@ tr {
     height: 100px;
     width: 100%;
 }
+.searchForm {
+    width: auto;
+}
 #search{
-    background-color:#e4e4e4;
+    background-color: #e4e4e4 ;
     border-radius: 10px;
     border: #b9b9b9 1px solid;
     height: 40px;
     display: flex;
-    margin-left: 10%;
+    margin-left: 23px;
 
 }
 .search {
     padding-top: 10px;
-    background-color:#e4e4e4;
+    background-color: #e4e4e4;
     -webkit-appearance: none;
     margin: 0;
     padding: 0;
@@ -74,31 +90,26 @@ tr {
     border: none;
     height: auto;
     font-size: 16px;
+    width: 90%;
+    transition: 1s;
 }
 .searchText::placeholder {
     font-size: 13px;
 }
-.søkeBildet {
+.searchText {
+    transition: 1s;
+}
+#søkeBildet {
     width: 40px;
     height: 26px;
-    margin: auto;
-}
-#pfpRadius {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    border: solid #d3d3d3 1px;
-    overflow: hidden;
-    background-color: white;
-    margin: auto;
-    margin-top: 10px;
+    margin: auto 0 auto 0;
 }
 /* en av "de"*/
 .pfpRadius {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    border: solid #d3d3d3 1px;
+    border: solid #d3d3d3  1px;
     overflow: hidden;
     background-color: white;
     margin: auto;
@@ -121,7 +132,7 @@ tr {
     font-size: 14px;
 }
 .dropElement:nth-child(2) {
-    border-bottom: 1px #d3d3d3 solid;
+    border-bottom: 1px #d3d3d3  solid;
 }
 #pfpRadius:hover {
     cursor: pointer;
@@ -231,7 +242,7 @@ img {
     border-radius: 50%;
     overflow: hidden;
     margin-left: 10%;
-    border: 1px #d3d3d3 solid;
+    border: 1px #d3d3d3  solid;
 }
 
 .bigPfp {
@@ -269,7 +280,7 @@ div label {
 }
 .edit {
     position: absolute;
-    border: 1px solid #d3d3d3;
+    border: 1px solid #d3d3d3 ;
     padding: 0.2em;
     margin-left: 30px;
     margin-top: 30px;
@@ -302,7 +313,7 @@ div label {
     margin: auto;
 }
 .underline {
-    border-bottom: #d3d3d3 1px solid;
+    border-bottom: #d3d3d3  1px solid;
 }
 #highscoreTable tr:nth-child(even){
     background-color: #e7e7e7;
@@ -311,7 +322,7 @@ div label {
 #highscoreTable tr:hover {background-color: #ddd;}
 
 .register {
-    border: 1px #d3d3d3 solid;
+    border: 1px #d3d3d3  solid;
     background-color: white;
     margin: auto;
     width: 384px; /*samme som width 20%*/
@@ -321,7 +332,7 @@ div label {
     width: 55%;
     -webkit-appearance: none;
     margin: 5px;
-    border: 1px solid #d3d3d3;
+    border: 1px solid #d3d3d3 ;
     outline: none;
     height: 30px;
     border-radius: 4px;
@@ -382,7 +393,7 @@ input[type = "submit"]:hover {
     margin: auto;
     margin-top: 30px;
     overflow: hidden;
-    border: 1px solid #d3d3d3;
+    border: 1px solid #d3d3d3 ;
 }
 .profilInnlegg {
     text-align: left;
@@ -405,7 +416,7 @@ input[type = "submit"]:hover {
 }
 .addComment {
     width: 100%;
-    border-top: 1px solid #d3d3d3;
+    border-top: 1px solid #d3d3d3 ;
 }
 .newComment {
     width: 80%;
@@ -421,7 +432,7 @@ input[type = "submit"]:hover {
     color: black;
 }
 input[type = "submit"]:disabled {
-    background-color: #d3d3d3;
+    background-color: #d3d3d3 ;
 }
 .kommentarer {
     height: 50px;
@@ -442,7 +453,7 @@ input[type = "submit"]:disabled {
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    border: solid #d3d3d3 1px;
+    border: solid #d3d3d3  1px;
     overflow: hidden;
     background-color: white;
     margin: auto;
@@ -471,15 +482,33 @@ input[type = "submit"]:disabled {
     cursor: pointer;
 }
 
-/* search */
+/* resultat på søk */
+
 
 .result{
-    height: 200px;
     width: 100%;
     display: flex;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
 }
 .result:hover{
     background-color: rgb(207, 207, 207, 0.4);
+    cursor: pointer;
+}
+.brukerSøk {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 50px;
+
+}
+.desc, .bruker {
+    margin: 0;
+    padding: 0;
+}
+.light {
+    color: #888888;
+    font-weight: 400;
 }
 
 

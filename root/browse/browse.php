@@ -26,19 +26,17 @@ if (isset($_SESSION['username']) && $_SESSION['loggedin'] === true) {
         <div class="left-navbar">
             <img src="../htmlBilder/logo.png" alt="logo" class="logo">
         </div>
-        <form method="GET" class="row" action="search.php">
-            <div id="search">
-                <img src="../htmlBilder/søke.png" class="søkeBildet" alt="">
+                <form method="GET" class="row searchForm"  action='search.php'>
+            <div id="search" style="width: 15vw">
+                <img src="../htmlBilder/søke.png" id="søkeBildet" alt="">
                 <input class="search" id="searchText" name="k" type="text" class="search" placeholder="Search">
             </div>
-
-            <input type="submit">
         </form>
         <div class="right-navbar">
             <a class="menu" href="../browse/index.php"><img class="navbar-icon" src="../htmlBilder/browse-reverse.png" alt="home"></a>
             <a class="menu" href="../game/pong.php">Pong</a>
             <div id="pfpRadius" class="dropdownElement pfpRadius">
-                <img class="profilBildet" id="drop" src="<?php echo $_SESSION['profilePic']; ?>" alt="profile picture">
+                <img class="profilBildet" id="drop" src="../profilbilder/standard.svg" alt="profile picture">
             </div>
 
 

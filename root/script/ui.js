@@ -2,11 +2,15 @@ let pfpEl = document.getElementById("pfpRadius");
 let dropDownEl = document.getElementById("dropDown");
 let invisableEl = document.getElementById("invisable");
 
+let searchTextEl = document.getElementById("searchText");
+let searchEl = document.getElementById("search");
 
 document.body.addEventListener("click", pfpDropdown)
 dropDownEl.style.display = "none"
 
 //hvorfor må jeg trykke 1 gang på skjermen før jeg kan trykke på profilbildet?
+//svar: js endrer ikke css, de endrer <style> tag i html ved å legge til et tagg.
+// man må ha style display none i html filen ikke i css
 function pfpDropdown(e) {
     if (dropDownEl.style.display === "none" && (e.target.id == "drop" || e.target.id == "pfpradius")) {
         dropDownEl.style.display = "flex";
@@ -15,11 +19,35 @@ function pfpDropdown(e) {
     };
 }
 
+document.body.addEventListener('click', searchExpansion);
+
+function searchExpansion(e) {
+    if (searchEl.style.width == "15vw" && (e.target.id == 'search' || e.target.id == 'searchText' || e.target.id == 'søkeBildet')) {
+        searchEl.style.width = "30vw";
+    } else if (!(e.target.id == 'search')) {
+        if (!(e.target.id == 'searchText')) {
+            if (!(e.target.id == 'søkeBildet')) {
+                searchEl.style.width = "15vw"
+            }
+        }
+    }
+        //gjør at man går til søkefeltet (inputen)
+    if (e.target.id == 'søkeBildet' || e.target.id == 'search') {
+        searchTextEl.focus();
+        searchTextEl.select();
+
+    }
+
+}
+
+
 
 //får en error dersom jeg endrer bare bruker writeForm istedet for 2 funksjoner
 //fant ut at jeg ikke kan ha 2 paremeter i php når jeg har en onclick function
 function sendTilProfil(username) {
+    //MÅ HA INVISABLEEL ID PÅ EN DIV FOR AT DENNE SKAL FUNKE
     writeForm("../profile/profile.php", "profileForm", "otherProfile", username);
+    console.log(username);
 }
 
 function follow(username) {
@@ -80,4 +108,16 @@ function like(bildeId) {
         + '<input class = "invisable" type = "text" name = "like" value ="0">'
         + ' </form>';
     document.getElementById("likeForm").submit();
+}
+
+
+
+//lar ikke trykke enter hvis man ikke har skrevet noe i søkefelt
+searchTextEl.addEventListener('keypress', restrictSearch);
+function restrictSearch(e) {
+    if (searchTextEl.value == "") {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+        }
+    }
 }
