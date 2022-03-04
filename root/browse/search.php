@@ -30,38 +30,41 @@ if (isset($_GET['k']) && $_GET['k'] != '') {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
-    <title>Results for <?php echo ' '.$k ?></title>
+    <title>Results for <?php echo ' ' . $k ?></title>
 </head>
 
 <body>
     <div class="navbar">
-        <div class="left-navbar">
-            <img src="../htmlBilder/logo.png" alt="logo" class="logo">
-        </div>
-        <form method="GET" class="row searchForm"  action='search.php'>
-            <div id="search" style="width: 15vw">
-                <img src="../htmlBilder/søke.png" id="søkeBildet" alt="">
-                <input class="search" id="searchText" name="k" type="text" class="search" placeholder="Search">
+        <div class="navWidth">
+            <div class="left-navbar">
+                <img src="../htmlBilder/logo.png" alt="logo" class="logo">
             </div>
-        </form>
-        <div class="right-navbar">
-            <a class="menu" href="../browse/following.php"><img class="navbar-icon" src="../htmlBilder/house.png" alt="home"></a>
-            <a class="menu" href="../browse/index.php"><img class="navbar-icon" src="../htmlBilder/browse.png" alt="explore"></a>
-            <a class="menu" id="modal"><img class="navbar-icon" src="../htmlBilder/share-button.png" alt="upload picture"></a>
-            <a class="menu" href="../game/pong.php"><img class="navbar-icon" src="../htmlBilder/pong.png" alt="explore"></a>
-            <div id="pfpRadius" class="dropdownElement pfpRadius">
-                <img class="profilBildet" id="drop" src="<?php echo $_SESSION['profilePic']; ?>" alt="profile picture">
-            </div>
+            <form method="GET" class="row searchForm" action='search.php'>
+                <div id="search" style="width: 15vw">
+                    <img src="../htmlBilder/søke.png" id="søkeBildet" alt="">
+                    <input class="search" id="searchText" name="k" type="text" class="search" placeholder="Search">
+                </div>
+            </form>
+            <div class="right-navbar">
+                <a class="menu" href="../browse/following.php"><img class="navbar-icon" src="../htmlBilder/house.png" alt="home"></a>
+                <a class="menu" href="../browse/index.php"><img class="navbar-icon" src="../htmlBilder/browse.png" alt="explore"></a>
+                <a class="menu" id="modal"><img class="navbar-icon" src="../htmlBilder/share-button.png" alt="upload picture"></a>
+                <a class="menu" href="../game/pong.php"><img class="navbar-icon" src="../htmlBilder/pong.png" alt="explore"></a>
+                <div id="pfpRadius" class="dropdownElement pfpRadius">
+                    <img class="profilBildet" id="drop" src="<?php echo $_SESSION['profilePic']; ?>" alt="profile picture">
+                </div>
 
 
-            <div id="dropDown" class="shadow">
-                <div class="dropContainer ">
-                    <a class="dropElement" href="../profile/profile.php">Profil</a>
-                    <a class="dropElement" href="../profile/profileEdit.php">Edit profile</a>
-                    <a class="dropElement" href="../process/logout.php">Log Out</a>
+                <div id="dropDown" class="shadow">
+                    <div class="dropContainer ">
+                        <a class="dropElement" href="../profile/profile.php">Profil</a>
+                        <a class="dropElement" href="../profile/profileEdit.php">Edit profile</a>
+                        <a class="dropElement" href="../process/logout.php">Log Out</a>
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
     <div class="whitespace"> </div>
     <div class="container containerBody">
@@ -69,12 +72,12 @@ if (isset($_GET['k']) && $_GET['k'] != '') {
         if ($result = mysqli_query($link, $stmt)) {
             if ($result_num = mysqli_num_rows($result)) {
                 if ($result_num > 0) {
-                    print 'Your search for&#160;<i> ' .$k. '</i> <hr /> <br/>';
+                    print 'Your search for&#160;<i> ' . $k . '</i> <hr /> <br/>';
                     print '<div class = ""><b><u>' . $result_num . '</u></b> results found</div>';
                     while ($row = mysqli_fetch_assoc($result)) { //henter all dataen
                         $brukernavn = $row['username'];
                         $profilePic = $row['profilePicPath'];
-                        $bruker ="  <div class = 'result'  onClick=sendTilProfil('$brukernavn')>
+                        $bruker = "  <div class = 'result'  onClick=sendTilProfil('$brukernavn')>
                                         <div class = 'bigPfpRadius' >
                                             <img class = 'bigPfp'  src=" . $profilePic . " alt='$brukernavn'> 
                                         </div>
@@ -94,11 +97,11 @@ if (isset($_GET['k']) && $_GET['k'] != '') {
             print(mysqli_error($link));
         }
 
-         ?>
+        ?>
     </div>
     <div id="invisable"></div>
 
-        <script src="../script/ui.js"> </script>
+    <script src="../script/ui.js"> </script>
 </body>
 
 </html>

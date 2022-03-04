@@ -42,6 +42,16 @@ tr {
     z-index: 1;
     border-bottom: #d3d3d3  1px solid;
 }
+.navWidth {
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 5px;
+    padding-top: 10px;
+    height: 55px;
+    z-index: 1;
+
+}
 .navbar-icon {
     width: 40px;
 }
@@ -343,6 +353,7 @@ div label {
     background-color: #0095f6;
     color: white;
     border-radius: 4px;
+    margin-top: 20px;
 }
 #pfpSubmit {
     width: 51%;

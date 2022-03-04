@@ -106,9 +106,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <form action="login.php" method="POST">
         <div class=" register ">
             <div class="inputDiv">
-                <input class="input" type="text" name="username" placeholder="Username">
-                <input class="input" type="password" name="password" placeholder="Password">
-                <input class="input submit" type="submit" value="Log in">
+                <input class="input" id = "registerUser" type="text" name="username" placeholder="Username">
+                <input class="input" id = "registerPassword" type="password" name="password" placeholder="Password">
+                <input class="input submit"  id= 'registerSubmit' type="submit" value="Log in">
                 <p class="note"> <?php echo $login_err ?></p>
             </div>
         </div>
@@ -118,6 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         </div>
     </form>
     <script src="../script/ui.js"></script>
+    <script src="../script/register.js"></script>
 </body>
 
 </html>
