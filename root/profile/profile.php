@@ -161,7 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
                 <?php
                 if (!$otherProfile) {
-                    echo  '<form action="sharePic.php" method="POST" enctype="multipart/form-data">
+                    echo  '<form action="../process/sharePic.php" method="POST" enctype="multipart/form-data">
                         <input type="file" name="file">
                         <input class="input submit" id="profileSubmit" type="submit" name="submit" value="Upload">
                     </form>';

@@ -43,11 +43,11 @@ function searchExpansion(e) {
 }
 
 
-
+//MÅ HA INVISABLE ID PÅ EN DIV FOR AT DENNE SKAL FUNKE
 //får en error dersom jeg endrer bare bruker writeForm istedet for 2 funksjoner
 //fant ut at jeg ikke kan ha 2 paremeter i php når jeg har en onclick function
 function sendTilProfil(username) {
-    //MÅ HA INVISABLEEL ID PÅ EN DIV FOR AT DENNE SKAL FUNKE
+    
     writeForm("../profile/profile.php", "profileForm", "otherProfile", username);
     console.log(username);
 }
@@ -57,9 +57,19 @@ function follow(username) {
 }
 function unFollow(username) {
     writeForm("../profile/profile.php", "unFollowForm", "unFollowUser", username);
-
-
 }
+function deleteUser(username) {
+    writeForm("../process/deleteUser.php", "deleteUserForm", "deleteUser", username);
+}
+function confirmDelete(username) {
+    let confirmAction = confirm('Are you sure you want to delete your account?');
+    if (confirmAction) {
+        deleteUser(username);
+    } else {
+        console.log("cap");
+    }
+}
+
 function seeLiked(value) {
     console.log("caps");
     invisableEl.innerHTML = ''
@@ -123,3 +133,30 @@ function restrictSearch(e) {
         }
     }
 }
+
+//fjerner enter fra profileEdit slik at man ikke kan gjøre det feil
+let noEnter = [
+    document.getElementById('username'), 
+    document.getElementById('password'),
+    newPasswordEl = document.getElementById('password'),
+    document.getElementById('confirmPassword'),
+  ]
+
+for(i = 0; i < noEnter.length; i++) {
+    noEnter[i].addEventListener('keydown', restrictEnter);
+
+}
+function restrictEnter(e) {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+    }
+}
+
+
+function test() {
+    console.log("test");
+}
+
+
+
+

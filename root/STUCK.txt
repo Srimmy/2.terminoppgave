@@ -1,34 +1,20 @@
 Muligens en private account funksjon og en følge funksjon. 
     (true / false i $_SESION[private])
-kommentarfelt:
-lage en database som bare inneholder kommentarer og hvilket bildet det er koblit til.
-     kan deretter finne alt ved bruk av 
-    "SELECT * FROM KOMMENTAR WHERE USER = $username ORDER BY LIKES DESC;
-FOllowing page ved å ha en follow database der det bare står hvem som follower hvem.
-hver row inneholder en person som follower en annen person.
-lettere om det kunne ha vært en array eller noe
 
 
-Kan lage et chat system slik at man kan sende dm til hverandre.
-Kan legge til delete user som også setter alle bilder. Legg til knapp i profilEidit.php
-    lag en statement som er "DELETE FROM USERS WHERE USERNAME = $'USERNAME'"
-    mysqli_quer($link, $stmt);
-    stmt = DELETE * FROM BILDER WHERE BRUKERNAVN  = USERNAME
-    stmt = DELETE ALL FROM FOLLOWING WHERE FOLLOWING = username
-    DELETE ALL FROM FOLLOWING WHERE USERNAME = FOLLOWING
 
-Kan lage en like funksjon, fungerer helt likt som follow greia egentlig så det er bare copypaste
-
-FOLLOWING PAGE Funker ikke osm den skal, den tar ikke inn bildet ID.
 
 Kommentarfelt: lage slik instagram har det -> de har en modal der bildet blir til venstre
                 Du trykker på "see x comments" for å åpne siden, ingen av kommentarene vises før det.
 
-Må style kommentarer riktig slik at det ikke blir for stort, for et er stygt
+VIKTIG
+VIKTIG
+VIKTIG
+VIKTIG
+VIKTIG
+profileedit.php funker ikke som den skal I DET HELE TATT, IKKE COMMIT FØR DET ER FERDIG
 
-legge til slik at siden ikke refresher når man submiter noe.
 
-legge til terms of service ig.
 regex
 
 LAG DOKUMNTASJON

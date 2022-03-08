@@ -382,6 +382,14 @@ input[type = "submit"]:hover {
     display: flex;
     flex-direction: column;
 }
+#deleteUser {
+    background-color: rgb(255, 85, 85);
+    color: white;
+
+}
+#deleteUser:hover {
+    background-color: red;
+}
 .file {
     margin-left: 15%;
 }

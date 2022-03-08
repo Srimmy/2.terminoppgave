@@ -44,7 +44,7 @@ if (isset($_POST['submit'])) {
                 //flytter filen til riktig desitnasjon
                 move_uploaded_file($fileTmpName, $fileDestination);
 
-                header("Location: profile.php?uploadFromSharePic");
+                header("Location: ../profile/profile.php?uploadFromSharePic");
             } else {
                 echo "Your file is too large!";
             }
