@@ -7,12 +7,6 @@ Muligens en private account funksjon og en følge funksjon.
 Kommentarfelt: lage slik instagram har det -> de har en modal der bildet blir til venstre
                 Du trykker på "see x comments" for å åpne siden, ingen av kommentarene vises før det.
 
-VIKTIG
-VIKTIG
-VIKTIG
-VIKTIG
-VIKTIG
-profileedit.php funker ikke som den skal I DET HELE TATT, IKKE COMMIT FØR DET ER FERDIG
 
 
 regex
@@ -40,3 +34,5 @@ sett opp mer odkumentasjon som brukere til sql (muligens passord)
 Når brukere slettes legger du til en verdi i tabellen der det står "deleted", dermed kan du ta en if statement select * from users where !deleted" eller noe 
 
 FIX CSS I NAVBAR MED SPACE INBETWEEN I EN DIV SLIK AT DE IKKE OVERLAPPER NÅR DE BLIR MINDRE.
+
+Legg i 2 forms i stedet for 1 i profileedit slik at jeg kan fjerner restrict enter i JS.

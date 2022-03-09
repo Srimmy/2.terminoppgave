@@ -16,7 +16,7 @@ $username = $_SESSION['username'];
 //må gjøre slik at brukernavn delen blir selvstendig og at passord blir selvstendig.
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
-    if (isset($_POST['changePassword'])) {
+    if (isset($_POST['password'])) {
         //Setter som variabler
         $password = mysqli_real_escape_string($link, $_POST['password']);
         $newPassword = mysqli_real_escape_string($link, $_POST['newPassword']);
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                 $valid_err = "Something went wrong. Please try again later.";
             }
         }
-    } else if (isset($_POST['usernameChange'])) { //bare endre username
+    } else if (isset($_POST['username'])) { //bare endre username
         $newUsername = mysqli_real_escape_string($link, $_POST['username']);
         if (empty($_POST['username'])) {
             $username_err = "Please enter a username.";
@@ -152,7 +152,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         <div class="left-navbar">
             <img src="../htmlBilder/logo.png" alt="logo" class="logo">
         </div>
-        <form method="GET" class="row searchForm" action='search.php'>
+        <form method="GET" class="row searchForm" action='../profile/profile.php'>
             <div id="search" style="width: 15vw">
                 <img src="../htmlBilder/søke.png" id="søkeBildet" alt="">
                 <input class="search" id="searchText" name="k" type="text" class="search" placeholder="Search">
@@ -161,8 +161,26 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         <div class="right-navbar">
             <a class="menu" href="../browse/following.php"><img class="navbar-icon" src="../htmlBilder/house.png" alt="home"></a>
             <a class="menu" href="../browse/index.php"><img class="navbar-icon" src="../htmlBilder/browse.png" alt="explore"></a>
-            <a class="menu" id="modal"><img class="navbar-icon" src="../htmlBilder/share-button.png" alt="upload picture"></a>
             <a class="menu" href="../game/pong.php"><img class="navbar-icon" src="../htmlBilder/pong.png" alt="explore"></a>
+            <!--modal-->
+            <a class="menu" id="modalButton"><img class="navbar-icon" src="../htmlBilder/share-button.png" alt="upload picture"></a>
+            <div id="modalParent" onclick="hideModal(event)">
+                <div id="modalChild">
+                    <form action="../process/sharePic.php" method="POST" enctype="multipart/form-data">
+                        <div class="modalTitleDiv">
+                            <h2 class="modalTitle">Create a new post</h2>
+                            <input class="" id="uploadPicture" type="submit" name="submit" value="Upload">
+                        </div>
+                        <div class="preview">
+                            <img style="display: none;" id="picturePreview">
+                        </div>
+
+                        <label for="uploadInput" class="input submit" id="fileUpload"> Select from computer</label>
+                        <!--Live preview av bildet-->
+                        <input type="file" accept="image/*" onchange="showPreview(event);" id="uploadInput" name="file">
+                    </form>
+                </div>
+            </div>
             <div id="pfpRadius" class="dropdownElement pfpRadius">
                 <img class="profilBildet" id="drop" src="<?php echo $_SESSION['profilePic']; ?>" alt="profile picture">
             </div>
@@ -191,10 +209,14 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                 </div>
             </div>
         </form>
-        <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
             <div class="inputDiv">
                 <input class="input" type="text" name="username" id="username" placeholder="Username" value=<?php echo $_SESSION['username']; ?>>
                 <input class="input submit" type="submit" value="Change username" name="usernameChange">
+            </div>
+        </form>
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+            <div class="inputDiv">
                 <input class="input gap" type="password" id='password' name="password" placeholder="Password">
                 <input class="input" type="password" id='newPassword' name="newPassword" placeholder="New password">
                 <input class="input" type="password" id='confirmPassword' name="confirmPassword" placeholder="Confirm password">

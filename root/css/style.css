@@ -13,6 +13,7 @@
 }
 h2 {
     font-weight: 500;
+    font-size: 1em;
 }
 /* navbar */
 body{
@@ -65,6 +66,77 @@ tr {
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+@keyframes modalIntro {
+    0% {
+        transform: scale(1.5);
+    }
+    40% {
+        transform: scale(1.10);
+    }
+    100% {
+        transform: scale(1)
+    }
+}
+#modalParent {
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(0,0,0, 0.7);
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: none;
+}
+#modalChild {
+    overflow: hidden;
+    position: absolute;
+    height: 80vh;
+    width: 40vw;
+    border-radius: 20px;
+    background-color: rgb(245, 245, 245);
+    margin-left: 30vw;
+    margin-top: 10vh;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.modalTitleDiv{
+    z-index: 100;
+    width: 100%;
+    text-align: center;
+    border-bottom: #d3d3d3 1px solid;
+}
+.modalTitle {
+    font-size: 15px
+}
+#picturePreview {
+    position: absolute;
+    height: 80vh;
+    /*sentrer bildet av en eller annen grunn*/
+    position: absolute;
+    left: -9999px;
+    right: -9999px;
+    margin: auto;
+    font-weight: bold;
+}
+.preview{
+    width: 100%;
+    text-align: center;
+
+}
+#uploadPicture {
+    position: absolute;
+    background: none;
+	color: rgb(168, 168, 168);
+	border: none;
+	padding: 0;
+	font: inherit;
+    font-size: 14px;
+	cursor: pointer;
+	outline: inherit;
+    right: 15px;
+    top: 12px;
+}
+#uploadPicture:hover {
+    cursor: default;
 }
 .menu {
     cursor: pointer;
@@ -329,6 +401,7 @@ div label {
     background-color: #e7e7e7;
 }
 
+
 #highscoreTable tr:hover {background-color: #ddd;}
 
 .register {
@@ -346,6 +419,10 @@ div label {
     outline: none;
     height: 30px;
     border-radius: 4px;
+    font-size: 15px;
+}
+#uploadInput {
+    display: none;
 }
 .submit {
     width: 56.5%;
@@ -355,6 +432,16 @@ div label {
     border-radius: 4px;
     margin-top: 20px;
 }
+.submit:hover {
+    background-color: #0483d8;
+    cursor: pointer;
+}
+#fileUpload {
+    padding: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    text-align: center;
+}
 #pfpSubmit {
     width: 51%;
 }
@@ -362,8 +449,8 @@ input[type = "text"]::placeholder, input[type = "password"]::placeholder{
     font-size: 12px;
 }
 input[type = "submit"]:hover {
-    background-color: #0483d8;
-    cursor: pointer;
+    /* background-color: #0483d8;
+    cursor: pointer; */
 }
 .inputDiv {
     margin: 5%;

@@ -79,17 +79,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_SESSION['loggedin']) { //vetner p�
         <div class="left-navbar">
             <img src="../htmlBilder/logo.png" alt="logo" class="logo">
         </div>
-                <form method="GET" class="row searchForm"  action='search.php'>
-            <div id="search" style="width: 15vw">
-                <img src="../htmlBilder/søke.png" id="søkeBildet" alt="">
-                <input class="search" id="searchText" name="k" type="text" class="search" placeholder="Search">
-            </div>
-        </form>
+       <form method="GET" class="row searchForm" action='../profile/profile.php'>
+                <div id="search" style="width: 15vw">
+                    <img src="../htmlBilder/søke.png" id="søkeBildet" alt="">
+                    <input class="search" id="searchText" name="k" type="text" class="search" placeholder="Search">
+                </div>
+            </form>
         <div class="right-navbar">
             <a class="menu" href="../browse/following.php"><img class="navbar-icon" src="../htmlBilder/house.png" alt="home"></a>
             <a class="menu" href="../browse/index.php"><img class="navbar-icon" src="../htmlBilder/browse.png" alt="explore"></a>
-            <a class="menu" id = "modal"><img class="navbar-icon" src="../htmlBilder/share-button.png" alt="upload picture"></a>
             <a class="menu" href="../game/pong.php"><img class="navbar-icon" src="../htmlBilder/pong-reverse.png" alt="explore"></a>
+            <!--modal-->
+            <a class="menu" id="modalButton"><img class="navbar-icon" src="../htmlBilder/share-button.png" alt="upload picture"></a>
+            <div id="modalParent" onclick="hideModal(event)">
+                <div id="modalChild">
+                    <form action="../process/sharePic.php" method="POST" enctype="multipart/form-data">
+                        <div class="modalTitleDiv">
+                            <h2 class="modalTitle">Create a new post</h2>
+                            <input class="" id="uploadPicture" type="submit" name="submit" value="Upload">
+                        </div>
+                        <div class="preview">
+                            <img style="display: none;" id="picturePreview">
+                        </div>
+
+                        <label for="uploadInput" class="input submit" id="fileUpload"> Select from computer</label>
+                        <!--Live preview av bildet-->
+                        <input type="file" accept="image/*" onchange="showPreview(event);" id="uploadInput" name="file">
+                    </form>
+                </div>
+            </div>
             <div id="pfpRadius" class="dropdownElement pfpRadius">
                 <img class="profilBildet" id="drop" src="<?php echo $_SESSION['profilePic']; ?>" alt="profile picture">
             </div>
@@ -103,6 +121,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_SESSION['loggedin']) { //vetner p�
                 </div>
             </div>
         </div>
+    </div>
+
     </div>
 
 

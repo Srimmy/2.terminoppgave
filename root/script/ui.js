@@ -5,7 +5,27 @@ let invisableEl = document.getElementById("invisable");
 let searchTextEl = document.getElementById("searchText");
 let searchEl = document.getElementById("search");
 
+//modal
+let modalButtonEl = document.getElementById('modalButton');
+let modalParentEl = document.getElementById('modalParent');
+let modalChildEl = document.getElementById('modalChild');
+let uploadPictureEl = document.getElementById('uploadPicture');
 
+console.log(modalButtonEl);
+modalButtonEl.addEventListener("click", showModal);
+
+function showModal() {
+    modalParentEl.style.display = 'block';
+    modalChildEl.style.animation = 'modalIntro 0.02s';
+}
+
+function hideModal(e) {
+    console.log(e.target.id);
+    if(e.target.id == 'modalParent') {
+        modalParentEl.style.display = 'none';
+    }
+    console.log(e.target.id);
+}
 
 document.body.addEventListener("click", pfpDropdown)
 dropDownEl.style.display = "none"
@@ -134,28 +154,25 @@ function restrictSearch(e) {
     }
 }
 
-//fjerner enter fra profileEdit slik at man ikke kan gjøre det feil
-let noEnter = [
-    document.getElementById('username'), 
-    document.getElementById('password'),
-    newPasswordEl = document.getElementById('password'),
-    document.getElementById('confirmPassword'),
-  ]
-
-for(i = 0; i < noEnter.length; i++) {
-    noEnter[i].addEventListener('keydown', restrictEnter);
-
-}
-function restrictEnter(e) {
-    if (e.key === 'Enter') {
-        e.preventDefault();
+uploadPictureEl.disabled = true;
+//live preview av bildet når man velger path i modalen
+function showPreview(event){
+    if(event.target.files.length > 0){
+      var src = URL.createObjectURL(event.target.files[0]);
+      var preview = document.getElementById("picturePreview");
+      preview.src = src;
+      preview.style.display = "block";
+      uploadPictureEl.disabled = false;
+      uploadPictureEl.style.cursor = "pointer";
+      uploadPictureEl.style.color = "#149df7";
     }
-}
+  }
 
 
 function test() {
     console.log("test");
 }
+
 
 
 
