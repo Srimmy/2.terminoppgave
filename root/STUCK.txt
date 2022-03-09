@@ -25,7 +25,6 @@ spør mailil om problem med apache og mysqli_
 sett opp nettverkdigatram
 sett opp risiko diagram
 
-legge til søkebar med SQL fordi man kan bruke "where is like" eller noe
 
 Bruk websocket for å oppdatere siden uten å måtte refreshe
 

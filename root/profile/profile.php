@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <div class="left-navbar">
             <img src="../htmlBilder/logo.png" alt="logo" class="logo">
         </div>
-        <form method="GET" class="row searchForm" action='../profile/profile.php'>
+        <form method="GET" class="row searchForm" action='../browse/search.php'>
             <div id="search" style="width: 15vw">
                 <img src="../htmlBilder/søke.png" id="søkeBildet" alt="">
                 <input class="search" id="searchText" name="k" type="text" class="search" placeholder="Search">
@@ -92,7 +92,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <div class="right-navbar">
             <a class="menu" href="../browse/following.php"><img class="navbar-icon" src="../htmlBilder/house.png" alt="home"></a>
             <a class="menu" href="../browse/index.php"><img class="navbar-icon" src="../htmlBilder/browse.png" alt="explore"></a>
-            <a class="menu" id="modal"><img class="navbar-icon" src="../htmlBilder/share-button.png" alt="upload picture"></a>
                 <a class="menu" href="../game/pong.php"><img class="navbar-icon" src="../htmlBilder/pong.png" alt="explore"></a>
                 <!--modal-->
                 <a class="menu" id="modalButton"><img class="navbar-icon" src="../htmlBilder/share-button.png" alt="upload picture"></a>

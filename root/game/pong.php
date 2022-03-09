@@ -79,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_SESSION['loggedin']) { //vetner p�
         <div class="left-navbar">
             <img src="../htmlBilder/logo.png" alt="logo" class="logo">
         </div>
-       <form method="GET" class="row searchForm" action='../profile/profile.php'>
+       <form method="GET" class="row searchForm" action='../browse/search.php'>
                 <div id="search" style="width: 15vw">
                     <img src="../htmlBilder/søke.png" id="søkeBildet" alt="">
                     <input class="search" id="searchText" name="k" type="text" class="search" placeholder="Search">
