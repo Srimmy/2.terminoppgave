@@ -68,18 +68,18 @@ function searchExpansion(e) {
 //fant ut at jeg ikke kan ha 2 paremeter i php når jeg har en onclick function
 function sendTilProfil(username) {
     
-    writeForm("../profile/profile.php", "profileForm", "otherProfile", username);
+    writeForm("../profile/profile.php", "profileForm", "otherProfile", username, "username");
     console.log(username);
 }
 
 function follow(username) {
-    writeForm("../profile/profile.php", "followForm", "followUser", username);
+    writeForm("../profile/profile.php", "followForm", "followUser", username, "username");
 }
 function unFollow(username) {
-    writeForm("../profile/profile.php", "unFollowForm", "unFollowUser", username);
+    writeForm("../profile/profile.php", "unFollowForm", "unFollowUser", username, "username");
 }
 function deleteUser(username) {
-    writeForm("../process/deleteUser.php", "deleteUserForm", "deleteUser", username);
+    writeForm("../process/deleteUser.php", "deleteUserForm", "deleteUser", username, "username");
 }
 function confirmDelete(username) {
     let confirmAction = confirm('Are you sure you want to delete your account?');
@@ -88,6 +88,10 @@ function confirmDelete(username) {
     } else {
         console.log("cap");
     }
+}
+function seeTicket(id) {
+    console.log("cap");
+    writeForm("../costumerSupport/openTicket.php", "seeTicketForm", "seeTicket", id, "id");
 }
 
 function seeLiked(value) {
@@ -101,10 +105,10 @@ function seeLiked(value) {
 }
 //kan endre denne funksjonen slik at den blir universell etterhvert
 //da denne var document.write ble det flasha uten css
-function writeForm(php, id, name, username) {
+function writeForm(php, id, name, value, postName) {
     invisableEl.innerHTML = ''
         + '<form action="' + php + '" method ="POST" id = "' + id + '">'
-        + '<input class = "invisable" type="text" name = "username" value=' + username + '>'
+        + '<input class = "invisable" type="text" name = '+ postName+' value=' + value + '>'
         + '<input class = "invisable" type = "text" name = "' + name + '" value ="0">'
         + ' </form>';
     document.getElementById(id.toString()).submit();

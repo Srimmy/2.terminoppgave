@@ -51,57 +51,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/style.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="../css/login.css">
+    <title>Login</title>
 </head>
 
 <body>
-    <!-- navbar -->
-    <div class="navbar">
-        <div class="left-navbar">
-            <img src="../htmlBilder/logo.png" alt="logo" class="logo">
-        </div>
-       <form method="GET" class="row searchForm" action='../browse/search.php'>
-                <div id="search" style="width: 15vw">
-                    <img src="../htmlBilder/søke.png" id="søkeBildet" alt="">
-                    <input class="search" id="searchText" name="k" type="text" class="search" placeholder="Search">
-                </div>
-            </form>
-        <div class="right-navbar">
-            <a class="menu" href="../browse/following.php"><img class="navbar-icon" src="../htmlBilder/house.png" alt="home"></a>
-            <a class="menu" href="../browse/index.php"><img class="navbar-icon" src="../htmlBilder/browse.png" alt="explore"></a>
-            <a class="menu" id="modal"><img class="navbar-icon" src="../htmlBilder/share-button.png" alt="upload picture"></a>
-            <a class="menu" href="../game/pong.php"><img class="navbar-icon" src="../htmlBilder/pong.png" alt="explore"></a>
-            <div id="pfpRadius" class="dropdownElement pfpRadius">
-                <img class="profilBildet" id="drop" src="../profilbilder/standard.svg" alt="profile picture">
-            </div>
 
-
-            <div id="dropDown" class="shadow">
-                <div class="dropContainer ">
-                    <a class="dropElement" href="../profile/profile.php">Profil</a>
-                    <a class="dropElement" href="../profile/profileEdit.php">Edit profile</a>
-                    <a class="dropElement" href="../process/logout.php">Log Out</a>
-                </div>
+    <div class="center">
+        <h1>Register</h1>
+        <form action="register.php" method="POST">
+            <div class="text-field">
+                <input type="text" name = "username"required>
+                <span></span>
+                <label>Username</label>
             </div>
-        </div>
+            <div class="text-field">
+                <input type="password" name = "password" required>
+                <span></span>
+                <label>Password</label>
+            </div>
+            <div class="text-field">
+                <input type="password" name = "confirmPassword" required>
+                <span></span>
+                <label>Confirm Password</label>
+            </div>
+            <input type="submit" value="Register">
+            <p class="signup_link">Alreayd have an account? <a href="login.php"> Login</a></p>
+
     </div>
-    <div class="whitespace"></div>
-    <form action="register.php" method="POST">
-        <div class=" register ">
-            <div class="inputDiv">
-                <input class="input" type="text" name="username" placeholder="Username">
-                <input class="input" type="password" name="password" placeholder="Password">
-                <input class="input" type="password" name="confirmPassword" placeholder="Confirm password">
-                <input class="input submit" type="submit" value="Register">
-                <p> <?php echo $username_err; ?></p>
-            </div>
-        </div>
-        <div class="register gap ">
-            <p class="note">Already have an account? <a href="login.php" class="link">Log in</a></p>
-        </div>
-
     </form>
+
 </body>
 
 </html>

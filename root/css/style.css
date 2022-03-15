@@ -2,6 +2,7 @@
     color: #555555;
     transition: 0.4s;
     scroll-behavior: smooth;
+    text-align: left;
 }
 ::root {
     --search: #e4e4e4;
@@ -26,6 +27,9 @@ body{
 tr {
     border: 1px black solid
 }
+th {
+    text-align: left;
+  }
 .shadow{
     box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.38);
 }
@@ -175,9 +179,6 @@ tr {
     width: 90%;
     transition: 1s;
 }
-.searchText::placeholder {
-    font-size: 13px;
-}
 .searchText {
     transition: 1s;
 }
@@ -213,8 +214,8 @@ tr {
     text-align: left;
     font-size: 14px;
 }
-.dropElement:nth-child(2) {
-    border-bottom: 1px #d3d3d3  solid;
+.dropElement:last-child {
+    border-top: 1px #d3d3d3  solid;
 }
 #pfpRadius:hover {
     cursor: pointer;
@@ -304,11 +305,12 @@ td, th {
     padding: 8px;
     border-collapse: collapse;
     border: #555555 solid 1px;
-    width: 100%;
 
 }
 table {
     justify-content: left;
+    border-collapse: collapse;
+    width: 100%;
 }
 
 img {
@@ -411,6 +413,9 @@ div label {
     width: 384px; /*samme som width 20%*/
 
 }
+.register * {
+    text-align: center;
+}
 .input {
     width: 55%;
     -webkit-appearance: none;
@@ -421,6 +426,7 @@ div label {
     border-radius: 4px;
     font-size: 15px;
 }
+
 #uploadInput {
     display: none;
 }
@@ -445,8 +451,12 @@ div label {
 #pfpSubmit {
     width: 51%;
 }
+input[type = "text"], input[type = "password"] {
+    text-align: left;
+}
 input[type = "text"]::placeholder, input[type = "password"]::placeholder{
     font-size: 12px;
+    text-align: left;
 }
 input[type = "submit"]:hover {
     /* background-color: #0483d8;
@@ -616,6 +626,54 @@ input[type = "submit"]:disabled {
     color: #888888;
     font-weight: 400;
 }
+
+/*brukerstøtte*/
+.supportTitle, .suppportDescription {
+    -webkit-appearance: none;
+    outline: none;
+    border: none;
+    background-color: rgb(245, 245, 245);
+}
+.supportLabel{
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+.yourTickets{
+    border-bottom: 2px solid #d3d3d3;
+
+}
+.yourTickets:hover{
+    cursor: pointer;
+    background-color: rgb(207, 207, 207, 0.4);
+}
+.ticketTitle {
+    margin-top: 0;
+}
+.ticketTable * {
+    border: none;
+    font-size: 15px;
+
+}
+.ticketTable tr {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+.ticketTable tr:hover {
+    cursor: pointer;
+}
+.ticketDesc {
+    font-size: 14px;
+}
+
+
+/* new login */
+
+
+
+
+
+
 
 
 

@@ -28,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     $_SESSION['username'] = $user_data['username'];
                     $_SESSION['highscore'] = $user_data['highscore'];
                     $_SESSION['password'] = $user_data['password'];
+                    $_SESSION['role'] = $user_data['role'];
                     if (is_null($user_data['profilePicPath'])) {
                         $_SESSION['profilePic'] = "../profilbilder/standard.svg";
                     } else {
@@ -51,8 +52,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
 }
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,65 +59,31 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/navbar.css">
-    <link rel="stylesheet" href="../css/style.css">
-
-    <title>login</title>
-
+    <link rel="stylesheet" href="../css/login.css">
+    <title>Login</title>
 </head>
 
 <body>
 
-    <!-- navbar -->
-    <div class="navbar">
-        <div class="left-navbar">
-            <img src="../htmlBilder/logo.png" alt="logo" class="logo">
-        </div>
-       <form method="GET" class="row searchForm" action='../browse/search.php'>
-                <div id="search" style="width: 15vw">
-                    <img src="../htmlBilder/søke.png" id="søkeBildet" alt="">
-                    <input class="search" id="searchText" name="k" type="text" class="search" placeholder="Search">
-                </div>
-            </form>
-        <div class="right-navbar">
-            <a class="menu" href="../browse/following.php"><img class="navbar-icon" src="../htmlBilder/house.png" alt="home"></a>
-            <a class="menu" href="../browse/index.php"><img class="navbar-icon" src="../htmlBilder/browse.png" alt="explore"></a>
-            <a class="menu" id="modal"><img class="navbar-icon" src="../htmlBilder/share-button.png" alt="upload picture"></a>
-            <a class="menu" href="../game/pong.php"><img class="navbar-icon" src="../htmlBilder/pong.png" alt="explore"></a>
-            <div id="pfpRadius" class="dropdownElement pfpRadius">
-                <img class="profilBildet" id="drop" src="../profilbilder/standard.svg" alt="profile picture">
+    <div class="center">
+        <h1>Login</h1>
+        <form action="login.php" method="POST">
+            <div class="text-field">
+                <input type="text" name = "username"required>
+                <span></span>
+                <label>Username</label>
             </div>
-
-
-            <div id="dropDown" class="shadow">
-                <div class="dropContainer ">
-                    <a class="dropElement" href="../profile/profile.php">Profil</a>
-                    <a class="dropElement" href="../profile/profileEdit.php">Edit profile</a>
-                    <a class="dropElement" href="../process/logout.php">Log Out</a>
-                </div>
+            <div class="text-field">
+                <input type="password" name = "password" required>
+                <span></span>
+                <label>Password</label>
             </div>
-        </div>
+            <input type="submit" value="login">
+            <p class="signup_link">Don't have an account?<a href="register.php" class="link"> Sign up</a></p>
+
     </div>
-
-
-
-    <div class="whitespace"></div>
-    <form action="login.php" method="POST">
-        <div class=" register ">
-            <div class="inputDiv">
-                <input class="input" id="registerUser" type="text" name="username" placeholder="Username">
-                <input class="input" id="registerPassword" type="password" name="password" placeholder="Password">
-                <input class="input submit" id='registerSubmit' type="submit" value="Log in">
-                <p class="note"> <?php echo $login_err ?></p>
-            </div>
-        </div>
-        <div class="register gap ">
-            <p class="note">Don't have an account?<a href="register.php" class="link"> Sign up</a></p>
-            <p class="note">Need help? Contact us: <a href="mailto: srpra001@osloskolen.no" class="link">srpra001@osloskolen.no </a></p>
-        </div>
     </form>
-    <script src="../script/ui.js"></script>
-    <script src="../script/register.js"></script>
+
 </body>
 
 </html>

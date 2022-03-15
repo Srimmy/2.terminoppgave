@@ -89,6 +89,14 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                     <div class="dropContainer ">
                         <a class="dropElement" href="../profile/profile.php">Profil</a>
                         <a class="dropElement" href="../profile/profileEdit.php">Edit profile</a>
+                        <?php 
+                        $stmt = "SELECT * FROM USERS WHERE USERNAME = '$username'";
+                        if ($rad = mysqli_fetch_assoc(mysqli_query($link, $stmt))) {
+                            if (in_array($rad['role'], $answerTickets)) {
+                                echo '<a class="dropElement" href="../costumerSupport/answerTickets.php">Answer tickets</a>';
+                            }
+                        }
+                        ?>
                         <a class="dropElement" href="../process/logout.php">Log Out</a>
                     </div>
                 </div>

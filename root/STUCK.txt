@@ -1,3 +1,5 @@
+LEGG TIL TICKET DATABASE I DOKUMENTASJOn
+
 Muligens en private account funksjon og en følge funksjon. 
     (true / false i $_SESION[private])
 
@@ -10,6 +12,7 @@ Kommentarfelt: lage slik instagram har det -> de har en modal der bildet blir ti
 
 
 regex
+CCS i search er hella cap.
 
 LAG DOKUMNTASJON
 personven
@@ -24,7 +27,6 @@ spør lars om brannmur
 spør mailil om problem med apache og mysqli_
 sett opp nettverkdigatram
 sett opp risiko diagram
-
 
 Bruk websocket for å oppdatere siden uten å måtte refreshe
 
