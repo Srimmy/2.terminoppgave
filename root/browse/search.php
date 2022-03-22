@@ -1,6 +1,5 @@
 <?php
 require_once "../config/config.php";
-session_start();
 
 //search engine
 if (isset($_GET['k']) && $_GET['k'] != '') {

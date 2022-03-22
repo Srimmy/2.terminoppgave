@@ -1,6 +1,5 @@
 <?php
 
-session_start();
 require_once "../config/config.php";
 $sql = "SELECT username, highscore FROM users ORDER BY highscore desc LIMIT 1;"; //queries
 $result = mysqli_query($link, $sql);

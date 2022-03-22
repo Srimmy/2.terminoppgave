@@ -2,7 +2,6 @@
 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
     require_once "../config/config.php";
-    session_start();
     $reply = mysqli_real_escape_string($link, $_POST['reply']);
     $username = $_SESSION['username'];
     $ticketId = mysqli_real_escape_string($link,$_POST['id']);

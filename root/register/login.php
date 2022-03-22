@@ -1,8 +1,6 @@
 <?php
-session_start();
-
-
 require_once "../config/config.php";
+
 //definerer feilmeldinger
 $login_err = "";
 
@@ -19,7 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 //skjekker om dataen stemmer, funker ikke gjøre om passordet til hashed og teste d
                 if (password_verify($password, $user_data['password'])) {
                     //lager session slik at variabler lagrer seg, gjør det lettere senere
-                    session_start();
                     $_SESSION['loggedin'] = true;
                     $_SESSION['id'] = $user_data['id'];
                     $_SESSION['username'] = $user_data['username'];

@@ -6,7 +6,6 @@
 //https://www.youtube.com/watch?v=B-ywDE8tBeQ&ab_channel=NickFrostbutter SEARCH ENGINE
 //https://youtu.be/B-ywDE8tBeQ?t=1408
 
-session_start();
 require_once "../config/config.php";
 $followPage = false;
 $username = $_SESSION["username"];

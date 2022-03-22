@@ -1,13 +1,7 @@
 <?php
+
 require_once "../config/config.php";
-session_start();
-if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-    header("location: ../browse/browse.php");
-    exit;
-} else if (!in_array($_SESSION['role'], $answerTickets)) {
-    header("location: ../browse/index.php");
-    exit;
-}
+
 $username = $_SESSION['username'];
 
 ?>

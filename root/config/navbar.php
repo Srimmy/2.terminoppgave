@@ -38,8 +38,8 @@ switch (basename($_SERVER['PHP_SELF'])) {
         <a class="menu" href="../browse/following.php"><img class="navbar-icon" src="<?php echo $followingSrc; ?>" alt="home"></a>
         <a class="menu" href="../browse/index.php"><img class="navbar-icon" src="<?php echo $homeSrc; ?>" alt="explore"></a>
         <a class="menu" href="../game/pong.php"><img class="navbar-icon" src="<?php echo $pongSrc; ?>" alt="explore"></a>
-        <!--modal-->
         <a class="menu" id="modalButton"><img class="navbar-icon" src="../htmlBilder/share-button.png" alt="upload picture"></a>
+        <!--modal for del bilde popup, alt i denne er usynlig før man trykker på knappen-->
         <div id="modalParent" onclick="hideModal(event)">
             <div id="modalChild">
                 <form action="../process/sharePic.php" method="POST" enctype="multipart/form-data">
@@ -81,5 +81,3 @@ switch (basename($_SERVER['PHP_SELF'])) {
         </div>
     </div>
 </div>
-
-<script src="../script/ui.js"></script>

@@ -1,6 +1,5 @@
 <?Php
 require_once "../config/config.php";
-session_start();
 
 $username = $_SESSION['username'];
 if ($_SERVER['REQUEST_METHOD'] == "POST") {

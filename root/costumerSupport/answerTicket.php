@@ -1,19 +1,13 @@
 <?php
-session_start();
 require_once "../config/config.php";
 
 //henter ticket fra URL
-$stmt = "SELECT * FROM TICKET WHERE id = '".$_GET['id']."'";
+$stmt = "SELECT * FROM TICKET WHERE id = '" . $_GET['id'] . "'";
 $ticketUsername = mysqli_fetch_assoc(mysqli_query($link, $stmt))['user'];
 
-
-if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-    //case 1: du er ikke logget inn
-    header("location: ../register/login.php");
-    exit;
-} else if (in_array($_SESSION['role'], $answerTickets) || $_SESSION['username'] == $ticketUsername ) {
+if (in_array($_SESSION['role'], $answerTickets) || $_SESSION['username'] == $ticketUsername) {
     //case 2: du har en rolle som kan se tickets eller så er brukernavnet ditt den som skrev ticketen
-    if($_SESSION['username'] == $ticketUsername ) {
+    if ($_SESSION['username'] == $ticketUsername) {
         $role = "Author";
     }
 } else {
@@ -70,18 +64,17 @@ $escaped_url = htmlspecialchars($url, ENT_QUOTES, 'UTF-8');
             $result = mysqli_query($link, $stmt);
             $answerer = mysqli_fetch_assoc($result)['answerer'];
             //legger til informasjon til form, brukes senere på submit
-            $sendURL = '<input class = "invisable" value = "'.$escaped_url.'" name = "url">';
-            $sendID =  '<input class = "invisable" value = "'.$id.'" name = "id">';
-            if(isset($answerer)) {
+            $sendURL = '<input class = "invisable" value = "' . $escaped_url . '" name = "url">';
+            $sendID =  '<input class = "invisable" value = "' . $id . '" name = "id">';
+            if (isset($answerer)) {
                 //case 1: noen har satt seg selv om svarer til ticketen
                 if ($answerer == $_SESSION['username']) {
                     //case 1: du er den som er satt
                     echo '<input type="submit" value=" Unassign" name = "unAssign">';
                 } else {
                     //case 2: noen andre er satt
-                    echo '<h5'.mysqli_fetch_assoc($result)['answerer'].' is assigned</h5>';
+                    echo '<h5' . mysqli_fetch_assoc($result)['answerer'] . ' is assigned</h5>';
                 }
-
             } else {
                 //case 2: ingen er satt
                 echo '<input type="submit" value="Assign yourself" name = "assign">';
@@ -139,11 +132,19 @@ $escaped_url = htmlspecialchars($url, ENT_QUOTES, 'UTF-8');
             </div>
             <div class="thread">
                 <h5><?php echo $_SESSION['username'] ?> <br> <span><?php echo $role; ?></span></h5>
-                <form action="ticketreply.php" method="POST">
+                <form action="ticketreply.php" id="replyForm" method="POST">
                     <textarea required class="" name="reply" id="" cols="30" rows="10" placeholder="Write here"></textarea>
                     <input type="text" name="id" class="invisable" value="<?php echo $id; ?>">
                     <input type="text" name="url" class="invisable" value="<?php echo $escaped_url ?>">
-                    <input type="submit" value="Send reply">
+
+                </form>
+                <div class="row">
+                    <input type="submit" form="replyForm" value="Send reply">
+                    <form action="">
+                        <input type="submit" value="Mark as completed">
+                    </form>
+                </div>
+
             </div>
 
         </div>

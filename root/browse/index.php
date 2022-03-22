@@ -1,6 +1,5 @@
 <?php
 
-session_start();
 require_once "../config/config.php";
 //ser om du er logget inn
 $followPage = false;

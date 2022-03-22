@@ -220,10 +220,13 @@ th {
     padding-left: 2em;
     text-align: left;
     font-size: 14px;
+    text-decoration: none;
+    z-index: 100;
+    transition: 0.5s;
 }
 .dropElement:last-child {
     border-top: 1px #d3d3d3  solid;
-}
+}¨
 #pfpRadius:hover {
     cursor: pointer;
 }

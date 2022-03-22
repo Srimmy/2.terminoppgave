@@ -1,6 +1,5 @@
 <?php
 
-session_start();
 require_once "../config/config.php";
 $root = '../profilbilder/';
 $Id = $_SESSION['id'];
