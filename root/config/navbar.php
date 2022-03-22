@@ -3,6 +3,7 @@
 $followingSrc = "../htmlBilder/house.png";
 $homeSrc = "../htmlBilder/browse.png";
 $pongSrc = "../htmlBilder/pong.png";
+$logout = "Log Out";
 
 switch (basename($_SERVER['PHP_SELF'])) {
     case "following.php":
@@ -13,6 +14,8 @@ switch (basename($_SERVER['PHP_SELF'])) {
         break;
     case "browse.php":
         $homeSrc = "../htmlBilder/browse-reverse.png";
+        $logout = "Log In";
+        $_SESSION['profilePic'] = "../profilbilder/standard.svg";
         break;
     case "pong.php":
         $followingSrc = "../htmlBilder/pong-reverse.png";
@@ -73,7 +76,7 @@ switch (basename($_SERVER['PHP_SELF'])) {
                     }
                 }
                 ?>
-                <a class="dropElement" href="../process/logout.php">Log Out</a>
+                <a class="dropElement" href="../process/logout.php"><?php echo $logout ?></a>
             </div>
         </div>
     </div>
