@@ -1,5 +1,5 @@
 <?php
-require_once "../process/config.php";
+require_once "../config/config.php";
 session_start();
 
 //search engine
@@ -11,15 +11,15 @@ if (isset($_GET['k']) && $_GET['k'] != '') {
     $keywords = explode(' ', $k);
 
     //query
-    $stmt = "SELECT * FROM USERS WHERE";
+    $searchStmt = "SELECT * FROM USERS WHERE";
     foreach ($keywords as $word) {
-        $stmt .= " username like '%" . $word . "%' OR ";
+        $searchStmt .= " username like '%" . $word . "%' OR ";
         $display_words = "";
     }
 
     //fjerner den siste "OR" fra stringen for å ikke få feil
     //fjerner de siste 3 bokstavene fra stringen.
-    $stmt = substr($stmt, 0, strlen($stmt) - 3);
+    $searchStmt = substr($searchStmt, 0, strlen($searchStmt) - 3);
 }
 ?>
 <!DOCTYPE html>
@@ -34,62 +34,77 @@ if (isset($_GET['k']) && $_GET['k'] != '') {
 </head>
 
 <body>
+    <!-- navbar -->
     <div class="navbar">
-        <div class="navWidth">
-            <div class="left-navbar">
-                <img src="../htmlBilder/logo.png" alt="logo" class="logo">
+        <div class="left-navbar">
+            <img src="../htmlBilder/logo.png" alt="logo" class="logo">
+        </div>
+        <form method="GET" class="row searchForm" action='../browse/search.php'>
+            <div id="search" style="width: 15vw">
+                <img src="../htmlBilder/søke.png" id="søkeBildet" alt="">
+                <input class="search" id="searchText" name="k" type="text" class="search" placeholder="Search">
             </div>
-            <form method="GET" class="row searchForm" action='../browse/search.php'>
-                <div id="search" style="width: 15vw">
-                    <img src="../htmlBilder/søke.png" id="søkeBildet" alt="">
-                    <input class="search" id="searchText" name="k" type="text" class="search" placeholder="Search">
-                </div>
-            </form>
-            <div class="right-navbar">
-                <a class="menu" href="../browse/following.php"><img class="navbar-icon" src="../htmlBilder/house.png" alt="home"></a>
-                <a class="menu" href="../browse/index.php"><img class="navbar-icon" src="../htmlBilder/browse.png" alt="explore"></a>
-                <a class="menu" href="../game/pong.php"><img class="navbar-icon" src="../htmlBilder/pong.png" alt="explore"></a>
-                <!--modal-->
-                <a class="menu" id="modalButton"><img class="navbar-icon" src="../htmlBilder/share-button.png" alt="upload picture"></a>
-                <div id="modalParent" onclick="hideModal(event)">
-                    <div id="modalChild">
-                        <form action="../process/sharePic.php" method="POST" enctype="multipart/form-data">
-                            <div class="modalTitleDiv">
-                                <h2 class = "modalTitle">Create a new post</h2>
-                                <input class="" id="uploadPicture" type="submit"  name="submit" value="Upload">
-                            </div>
-                            <div class="preview">
-                                <img style="display: none;" id="picturePreview">
-                            </div>
+        </form>
+        <div class="right-navbar">
+            <a class="menu" href="../browse/following.php"><img class="navbar-icon" src="../htmlBilder/house.png" alt="home"></a>
+            <a class="menu" href="../browse/index.php"><img class="navbar-icon" src="../htmlBilder/browse.png" alt="explore"></a>
+            <a class="menu" href="../game/pong.php"><img class="navbar-icon" src="../htmlBilder/pong.png" alt="explore"></a>
+            <!--modal-->
+            <a class="menu" id="modalButton"><img class="navbar-icon" src="../htmlBilder/share-button.png" alt="upload picture"></a>
+            <div id="modalParent" onclick="hideModal(event)">
+                <div id="modalChild">
+                    <form action="../process/sharePic.php" method="POST" enctype="multipart/form-data">
+                        <div class="modalTitleDiv">
+                            <h2 class="modalTitle">Create a new post</h2>
+                            <input class="" id="uploadPicture" type="submit" name="submit" value="Upload">
+                        </div>
+                        <div class="preview">
+                            <img style="display: none;" id="picturePreview">
+                        </div>
 
-                            <label for="uploadInput" class="input submit" id="fileUpload"> Select from computer</label>
-                            <!--Live preview av bildet-->
-                            <input type="file" accept="image/*" onchange="showPreview(event);" id="uploadInput" name="file">
-                        </form>
-                    </div>
+                        <label for="uploadInput" class="input submit" id="fileUpload"> Select from computer</label>
+                        <!--Live preview av bildet-->
+                        <input type="file" accept="image/*" onchange="showPreview(event);" id="uploadInput" name="file">
+                    </form>
                 </div>
-                <div id="pfpRadius" class="dropdownElement pfpRadius">
-                    <img class="profilBildet" id="drop" src="<?php echo $_SESSION['profilePic']; ?>" alt="profile picture">
-                </div>
+            </div>
+            <div id="pfpRadius" class="dropdownElement pfpRadius">
+                <img class="profilBildet" id="drop" src="<?php echo $_SESSION['profilePic']; ?>" alt="profile picture">
+            </div>
 
 
-                <div id="dropDown" class="shadow">
-                    <div class="dropContainer ">
-                        <a class="dropElement" href="../profile/profile.php">Profil</a>
-                        <a class="dropElement" href="../profile/profileEdit.php">Edit profile</a>
-                        <a class="dropElement" href="../process/logout.php">Log Out</a>
-                    </div>
+            <div id="dropDown" class="shadow">
+                <div class="dropContainer ">
+                    <a class="dropElement" href="../profile/profile.php">Profil</a>
+                    <a class="dropElement" href="../profile/profileEdit.php">Edit profile</a>
+                    <a class="dropElement" href="../costumerSupport/tickets.php">Tickets</a>
+                    <?php
+                    //sjekker om du har role som ser tickets
+                    if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == true) {
+                        $username = $_SESSION['username'];
+                        $stmt = "SELECT * FROM USERS WHERE username = '$username'";
+                        if ($rad = mysqli_fetch_assoc(mysqli_query($link, $stmt))) {
+                            if (in_array($rad['role'], $answerTickets)) {
+                                echo '<a class="dropElement" href="../costumerSupport/openTicket.php">Answer tickets</a>';
+                            }
+                        }
+                    }
+
+                    ?>
+                    <a class="dropElement" href="../process/logout.php">Log Out</a>
                 </div>
             </div>
         </div>
-
     </div>
     <div class="whitespace"> </div>
     <div class="container containerBody">
         <?php
-        if ($result = mysqli_query($link, $stmt)) {
+        //kjører sql statement lenger opp i koden
+        if ($result = mysqli_query($link, $searchStmt)) {
+            //finner antall treff
             if ($result_num = mysqli_num_rows($result)) {
                 if ($result_num > 0) {
+                    //case 1: de som blir søkt på finnes
                     print 'Your search for&#160;<i> ' . $k . '</i> <hr /> <br/>';
                     print '<div class = ""><b><u>' . $result_num . '</u></b> results found</div>';
                     while ($row = mysqli_fetch_assoc($result)) { //henter all dataen
@@ -108,10 +123,12 @@ if (isset($_GET['k']) && $_GET['k'] != '') {
                         echo $bruker;
                     }
                 } else {
+                    //case 2: de finnes ikke
                     print "no results found";
                 }
             }
         } else {
+            //hvis queryen feiler
             print(mysqli_error($link));
         }
 

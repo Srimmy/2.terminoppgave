@@ -1,10 +1,6 @@
 <?Php
-require_once "../process/config.php";
+require_once "../config/config.php";
 session_start();
-if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-    header("location: ../register/login.php");
-    exit;
-}
 
 $username = $_SESSION['username'];
 if ($_SERVER['REQUEST_METHOD'] == "POST") {

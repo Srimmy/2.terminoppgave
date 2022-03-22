@@ -1,10 +1,10 @@
 <?php
 session_start();
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-    header("location: ../browse/browse.php");
+    header("location: ../register/login.php");
     exit;
 }
-require_once("../process/config.php");
+require_once "../config/config.php";
 $username = $_SESSION['username'];
 
 ?>
@@ -68,7 +68,7 @@ $username = $_SESSION['username'];
                     $stmt = "SELECT * FROM USERS WHERE USERNAME = '$username'";
                     if ($rad = mysqli_fetch_assoc(mysqli_query($link, $stmt))) {
                         if (in_array($rad['role'], $answerTickets)) {
-                            echo '<a class="dropElement" href="../costumerSupport/answerTickets.php">Answer tickets</a>';
+                            echo '<a class="dropElement" href="../costumerSupport/openTicket.php">Answer tickets</a>';
                         }
                     }
                     ?>
@@ -80,25 +80,31 @@ $username = $_SESSION['username'];
     <div class="whitespace"></div>
 
     <div class="containerBody">
-        <h2 class = "title">Your tickets</h2>
+        <h2 class="title">Your tickets</h2>
         <?php
         $stmt = "SELECT * FROM ticket where user = '$username' ORDER BY created_at desc";
         if ($result = mysqli_query($link, $stmt)) {
             while ($rad = mysqli_fetch_assoc($result)) {
                 $title = $rad['keyword'];
                 $desc = $rad['description'];
+                $id = $rad['id'];
                 echo " 
-                <div class = 'yourTickets'>
+                <div onClick=seeTicket('$id')> 
+                    <div class = 'yourTickets'>
                     <p class = 'ticketTitle'> <b>$title</b> </p>
                     <p class = 'ticketDesc'> $desc </p>
+                    </div>
                 </div>";
             }
         }
-
         ?>
+        Need help?
+        <a href="../costumerSupport/createTicket.php"> Create a ticket</a>
 
     </div>
-    <script src = "../script/ui.js"></script>
+    <div id="invisable"></div>
+    <script src="../script/ui.js"></script>
+
 </body>
 
 </html>

@@ -1,10 +1,10 @@
 <?php
 session_start();
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-    header("location: ../browse/browse.php");
+    header("location: ../register/login.php");
     exit;
 }
-require_once('../process/config.php');
+require_once "../config/config.php";
 $username = $_SESSION['username'];
 
 if (isset($_POST['title'])) {
@@ -18,7 +18,7 @@ if (isset($_POST['title'])) {
         $title = mysqli_real_escape_string($link, $_POST['title']);
         $desc = mysqli_real_escape_string($link, $_POST['desc']);
 
-        header("location: ../costumerSupport/createTicket");
+        // header("location: ../costumerSupport/createTicket");
     }
 } else {
     header("location: ../costumerSupport/createTicket");

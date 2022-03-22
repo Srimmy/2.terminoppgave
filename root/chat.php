@@ -1,5 +1,5 @@
 <?php
-require_once "../process/config.php";
+require_once "../config/config.php";
 
 
 $stmt = "SELECT * FROM USERS";

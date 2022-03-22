@@ -15,3 +15,9 @@ at begge bare sender rooten de vil ha slik at koden funker for alle uploads.
 
 lage dokumenter for lover og regler
 brukerstøtte
+
+//following page 
+
+        // SELECT following.following , following.username, bilder.Path, bilder.brukernavn, bilder.dato FROM following 
+        // JOIN bilder ON following.username = bilder.brukernavn
+        // ORDER BY bilder.DATO DESC; er satt som en view, den heter FOLLOWINGBILDER

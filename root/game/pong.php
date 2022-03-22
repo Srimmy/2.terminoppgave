@@ -1,32 +1,7 @@
 <?php
-// Initialize the session
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
 
 session_start();
-require_once "../process/config.php";
-// Check if the user is logged in, if not then redirect him to login page
-if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-    $_SESSION['profilePic'] = "../profilbilder/standard.svg";
-    $_SESSION['loggedin'] = false;
-    $username = "";
-} else {
-    $username = $_SESSION["username"];
-    $_SESSION['loggedin'] = true;
-}
+require_once "../config/config.php";
 $sql = "SELECT username, highscore FROM users ORDER BY highscore desc LIMIT 1;"; //queries
 $result = mysqli_query($link, $sql);
 if ($result) { //sjekker om det finnes noe
@@ -79,12 +54,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_SESSION['loggedin']) { //vetner p�
         <div class="left-navbar">
             <img src="../htmlBilder/logo.png" alt="logo" class="logo">
         </div>
-       <form method="GET" class="row searchForm" action='../browse/search.php'>
-                <div id="search" style="width: 15vw">
-                    <img src="../htmlBilder/søke.png" id="søkeBildet" alt="">
-                    <input class="search" id="searchText" name="k" type="text" class="search" placeholder="Search">
-                </div>
-            </form>
+        <form method="GET" class="row searchForm" action='../browse/search.php'>
+            <div id="search" style="width: 15vw">
+                <img src="../htmlBilder/søke.png" id="søkeBildet" alt="">
+                <input class="search" id="searchText" name="k" type="text" class="search" placeholder="Search">
+            </div>
+        </form>
         <div class="right-navbar">
             <a class="menu" href="../browse/following.php"><img class="navbar-icon" src="../htmlBilder/house.png" alt="home"></a>
             <a class="menu" href="../browse/index.php"><img class="navbar-icon" src="../htmlBilder/browse.png" alt="explore"></a>
@@ -117,6 +92,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_SESSION['loggedin']) { //vetner p�
                 <div class="dropContainer ">
                     <a class="dropElement" href="../profile/profile.php">Profil</a>
                     <a class="dropElement" href="../profile/profileEdit.php">Edit profile</a>
+                    <a class="dropElement" href="../costumerSupport/tickets.php">Tickets</a>
+                    <?php
+                    $stmt = "SELECT * FROM USERS WHERE USERNAME = '$username'";
+                    if ($rad = mysqli_fetch_assoc(mysqli_query($link, $stmt))) {
+                        if (in_array($rad['role'], $answerTickets)) {
+                            echo '<a class="dropElement" href="../costumerSupport/openTicket.php">Answer tickets</a>';
+                        }
+                    }
+                    ?>
                     <a class="dropElement" href="../process/logout.php">Log Out</a>
                 </div>
             </div>

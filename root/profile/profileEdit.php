@@ -1,10 +1,6 @@
 <?php
 session_start();
-require_once "../process/config.php";
-if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-    header("location: ../register/login.php");
-    exit;
-}
+require_once "../config/config.php";
 $root = '../profilbilder/';
 $id = $_SESSION['id'];
 $username_err = $password_err = $valid_err = $upload_err = "";
@@ -190,7 +186,16 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                 <div class="dropContainer ">
                     <a class="dropElement" href="../profile/profile.php">Profil</a>
                     <a class="dropElement" href="../profile/profileEdit.php">Edit profile</a>
-                    <a class="dropElement" href="../process/logout.php">Log Out</a>
+                                            <a class="dropElement" href="../costumerSupport/tickets.php">Tickets</a>
+                        <?php 
+                        $stmt = "SELECT * FROM USERS WHERE USERNAME = '$username'";
+                        if ($rad = mysqli_fetch_assoc(mysqli_query($link, $stmt))) {
+                            if (in_array($rad['role'], $answerTickets)) {
+                                echo '<a class="dropElement" href="../costumerSupport/openTicket.php">Answer tickets</a>';
+                            }
+                        }
+                        ?>
+                        <a class="dropElement" href="../process/logout.php">Log Out</a>
                 </div>
             </div>
         </div>

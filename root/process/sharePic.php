@@ -1,11 +1,7 @@
 <?php
 
 session_start();
-require_once "../process/config.php";
-if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-    header("location: login.php");
-    exit;
-}
+require_once "../config/config.php";
 $root = '../delteBilder/';
 $Id = $_SESSION['id'];
 $username = $_SESSION['username'];

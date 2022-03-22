@@ -31,7 +31,7 @@ th {
     text-align: left;
   }
 .shadow{
-    box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.38);
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
 .navbar {
     position: fixed;
@@ -102,6 +102,12 @@ th {
     margin-top: 10vh;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
+#modalChild label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 .modalTitleDiv{
     z-index: 100;
     width: 100%;
@@ -109,7 +115,8 @@ th {
     border-bottom: #d3d3d3 1px solid;
 }
 .modalTitle {
-    font-size: 15px
+    font-size: 15px;
+    text-align: center;
 }
 #picturePreview {
     position: absolute;
@@ -224,12 +231,14 @@ th {
 #dropDown {
     flex-direction: column;
     display: none;
-    position: absolute;
+    position: fixed;
     background-color: white;
+    top: 0;
+    margin-top: 70px;
+    margin-right: 20%;
     right: 0;
-    margin-top: 189px;
-    z-index: 1;
-    
+    z-index: 1; 
+    border-radius: 5px;
 }
 .successful {
     color: #54f054;
@@ -628,7 +637,7 @@ input[type = "submit"]:disabled {
 }
 
 /*brukerstøtte*/
-.supportTitle, .suppportDescription {
+.supportTitle, .supportDescription {
     -webkit-appearance: none;
     outline: none;
     border: none;
@@ -656,18 +665,73 @@ input[type = "submit"]:disabled {
 
 }
 .ticketTable tr {
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #d3d3d3;
+}
+.ticketTable th {
+    background-color: rgb(207, 207, 207);
 }
 .ticketTable tr:hover {
     cursor: pointer;
+    background-color: rgb(207, 207, 207, 0.4);
 }
 .ticketDesc {
     font-size: 14px;
 }
+.ticketPfp {
+    width: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: absolute;
+}
+.writer {
+    width: 5%;
+    display:flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+.writer *{
+    margin: auto;
+}
+.thread {
+    width: 100%;
+    margin-left: 20px;
+    margin-right: 40px;
+}
 
+.containerBody h4{
+    margin-top: -10px;
+    padding-bottom: 10px;
+    border-bottom: solid #d3d3d3 1px;
+    color: #d3d3d3;
+    font-size: 13px;
+    font-weight: 500;
+}
+.threadDiv {
+    width: 98%;
+    margin: auto;
+}
+.thread h5{
+    margin-top: 16.5px;
+}
+.thread p{
+    border-bottom: 1px solid #d3d3d3;
+    padding-bottom: 15px;
+}
+.thread textarea {
+    width: 100%;
+}
+textarea {
+    border: 1px solid #d3d3d3;
+    -webkit-appearance: none;
+    outline: none;
 
-/* new login */
+}
+h5 span {
+    font-weight: 400;
+    color: #d3d3d3;
+    font-size: 13px;
+}
+
 
 
 

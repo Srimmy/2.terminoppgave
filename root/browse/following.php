@@ -1,43 +1,27 @@
 <?php
 // Initialize the session
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
+
 
 // ONCLICK FUNKER IKKE HVIS MAN HAR NAME = "X" INNI TAGGET
 //https://www.youtube.com/watch?v=B-ywDE8tBeQ&ab_channel=NickFrostbutter SEARCH ENGINE
 //https://youtu.be/B-ywDE8tBeQ?t=1408
+
 session_start();
-require_once "../process/config.php";
-// Check if the user is logged in, if not then redirect him to login page
+require_once "../config/config.php";
 $followPage = false;
 $username = $_SESSION["username"];
-if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-    header("location: browse.php");
-    exit;
-}
 
-//like bilder
+
+//kjører hvis du trykker på like knappen
 if (isset($_POST['like'])) {
     $bildetIdPOST = $_POST['bildeId'];
     $stmt = "SELECT * FROM liktebilderview WHERE liker = '$username' AND id = '$bildetIdPOST'";
     if (mysqli_num_rows(mysqli_query($link, $stmt)) > 0) {
-        //den er liked
+        //case 1: du liker allerede, fjerner like
         $stmt = "DELETE FROM liktebilder where username = '$username' AND likedPicId = '$bildetIdPOST'";
         mysqli_query($link, $stmt);
     } else {
+        //case 2: du liker ikke, legger like
         $stmt = "INSERT INTO liktebilder(username, likedPicId) VALUES ('$username', '$bildetIdPOST')";
         mysqli_query($link, $stmt);
     }
@@ -108,47 +92,46 @@ if (isset($_POST['like'])) {
                 <div class="dropContainer ">
                     <a class="dropElement" href="../profile/profile.php">Profil</a>
                     <a class="dropElement" href="../profile/profileEdit.php">Edit profile</a>
+                    <a class="dropElement" href="../costumerSupport/tickets.php">Tickets</a>
+                    <?php
+                    //ser om rolen din kan se tickets
+                    $stmt = "SELECT * FROM USERS WHERE USERNAME = '$username'";
+                    if ($rad = mysqli_fetch_assoc(mysqli_query($link, $stmt))) {
+                        if (in_array($rad['role'], $answerTickets)) {
+                            echo '<a class="dropElement" href="../costumerSupport/openTicket.php">Answer tickets</a>';
+                        }
+                    }
+                    ?>
                     <a class="dropElement" href="../process/logout.php">Log Out</a>
+
                 </div>
             </div>
         </div>
     </div>
 
-    </div>
-
 
     <div class="whitespace"></div>
-    <h1 class="my-5">Hi, <b><?php echo htmlspecialchars($username); ?></b>. Welcome to our site.</h1>
-
-    <p>
-        <a href="sharePic.php">Share a picture</a>
-    </p>
 
     <!--Bildet feed-->
     <div class="container containerBody">
         <?php
-
-        // SELECT following.following , following.username, bilder.Path, bilder.brukernavn, bilder.dato FROM following 
-        // JOIN bilder ON following.username = bilder.brukernavn
-        // ORDER BY bilder.DATO DESC; er satt som en view, den heter FOLLOWINGBILDER
-        //follow page kode
-
+        //finner bilder fra de du follower
         $stmt = "SELECT * FROM FOLLOWINGBILDER WHERE FOLLOWING = '$username'";
         if ($result = mysqli_query($link, $stmt)) {
             $innleggTall = 0;
-
-
-            //kjører koden hver gang $rad får en ny verdi, altså for hver rad i databasen
+            //kjører loop for hver rad i databasen
             while ($rad = mysqli_fetch_assoc($result)) {
-                //definerer pathen til filen
                 $like = false;
+                //definerer pathen til filen
                 $path = $rad['Path'];
                 $usernamePic = $rad['brukernavn'];
                 $bildetId = $rad['id'];
+
+                //henter profilbildet
                 $stmt = "SELECT * FROM USERS WHERE USERNAME = '$usernamePic'";
                 $userPfp = mysqli_fetch_assoc(mysqli_query($link, $stmt))['profilePicPath'];
-                //elementet som skal vises
-                //funker ikke som writeForm function av en eller annen grunn, kanskje pga php kode
+
+                //skriver 1/3 av html, bare bruker, profilbildet og innlegget
                 $innleggEl = "<div class='innlegg'>
                                     <div class='row alignLeft'>
                                         <div class='pfpRadius profilInnlegg'>
@@ -161,29 +144,30 @@ if (isset($_POST['like'])) {
                                     </div>";
 
 
-                echo $innleggEl; //legger 1/3 av innlegget i html
+                echo $innleggEl;
+                //ser om du liker bildet
                 $stmt = "SELECT * FROM liktebilderview where liker = '$username' AND id = '$bildetId'";
                 if (mysqli_num_rows(mysqli_query($link, $stmt)) > 0) {
+                    //case 1: du liker bildet
                     $like = true;
-                }
-                if ($like) {
                     echo "<img src = '../htmlBilder/hjerte.png' class = 'hjerte' onclick=like('$bildetId')>";
                 } else {
+                    //case 2: du liker ikke bildet
                     echo "<img src = '../htmlBilder/usynligHjerte.png' class = 'hjerte' onclick=like('$bildetId')>";
                 }
 
+                //henter kommentarer på bildet
                 $stmt = "SELECT * FROM kommentarpåbildet where bildeid = '$bildetId'";
                 if ($result2 = mysqli_query($link, $stmt)) {
                     while ($rad2 = mysqli_fetch_assoc($result2)) {
                         $kommentar = $rad2['kommentar'];
                         $kommentarBruker = $rad2['brukernavn'];
                         $stmt = "SELECT * FROM USERS WHERE USERNAME = '$kommentarBruker'";
-                        //skjønner ikke hvorfor jeg ikke får lov til å skrive:
-                        //$pfp = mysqli_fetch_assoc(mysqli_query($link, $stmt))['profilePicPath']
                         $result3 = mysqli_query($link, $stmt);
                         $brukerInfo = mysqli_fetch_assoc($result3);
                         $pfp = $brukerInfo['profilePicPath'];
 
+                        //lager kommentarfeltet -> andre 1/3 av innlegget
                         $kommentarEl = "<div class = 'kommentarer'>
                                             <div class='row alignLeft'>
                                                 <div class='kommentarPfpRadius profilInnlegg'>
@@ -192,7 +176,7 @@ if (isset($_POST['like'])) {
                                                 <p class = 'kommentar' > <span class = 'pointer' hover = 'pointer' onclick=sendTilProfil('$kommentarBruker')> $kommentarBruker</span> $kommentar</p>
                                             </div>    
                                         </div>";
-                        echo $kommentarEl; //legger 1/3 av innlegget i html, altså alle kommentarene
+                        echo $kommentarEl;
                     }
                 }
                 $skrivKommentar = "

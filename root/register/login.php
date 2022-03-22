@@ -1,11 +1,8 @@
 <?php
 session_start();
-if (isset($_SESSION['username']) && $_SESSION['loggedin'] === true) {
-    header("location: ../browse/index.php?alreadyloggedin");
-    exit;
-}
 
-require_once "../process/config.php";
+
+require_once "../config/config.php";
 //definerer feilmeldinger
 $login_err = "";
 

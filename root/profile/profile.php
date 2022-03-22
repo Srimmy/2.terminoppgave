@@ -1,66 +1,58 @@
 <?php
-// Initialize the session
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
-/// BRUKT KONTROLL F5 for å refreshe php siden
 
 session_start();
-require_once "../process/config.php";
+require_once "../config/config.php";
 $likedEcho = "";
-// Check if the user is logged in, if not then redirect him to login page
-if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-    header("location: ../register/login.php");
-    exit;
-}
 $otherProfile = false;
 $following = false;
 $likedPictures = false;
+$url =  "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+$escaped_url = htmlspecialchars($url, ENT_QUOTES, 'UTF-8');
 
 //sin egen profil
 $username = $ownUsername = $_SESSION['username'];
 $profilePic = $_SESSION['profilePic'];
+
 //kan egentlig bare fjerne $:server request men jeg liker den koden 
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    if (isset($_POST['liked'])) {
-        if ($_POST['liked'] == 0) {
-            $likedPictures = true;
-        } else {
-            $likedPictures = false;
-        }
-    } else if (!($_POST['username'] == $_SESSION['username'])) {
-        //annen sin profil
-        $username = $_POST['username'];
+if ($_SERVER['REQUEST_METHOD'] == "GET") {
+    if (!($_GET['username'] == $_SESSION['username'])) {
+        $username = $_GET['username'];
         $stmt = "SELECT * FROM USERS WHERE USERNAME = '$username'";
-        $profilePic = mysqli_fetch_assoc($result = mysqli_query($link, $stmt))['profilePicPath'];
-        $otherProfile = true;
-        $stmt = "SELECT * FROM following WHERE following = '$ownUsername' AND username = '$username'";
-        //sjeker om det du følger denne personen
-        if (mysqli_num_rows(mysqli_query($link, $stmt)) > 0) {
-            $following = true;
+        //annen sin profil
+        if (mysqli_num_rows($result = mysqli_query($link, $stmt)) == 1) {
+            $profilePic = mysqli_fetch_assoc($result)['profilePicPath'];
+            $otherProfile = true;
+            if (isset($_GET['followUser'])) {
+                $following = true;
+                $stmt = "INSERT INTO following(following, username) VALUES('$ownUsername', '$username')";
+                mysqli_query($link, $stmt);
+                header("location: " . $escaped_url);
+            } else if (isset($_GET['unFollowUser'])) {
+                $following = false;
+                $stmt = "DELETE FROM following where following = '$ownUsername' AND username = '$username'";
+                mysqli_query($link, $stmt);
+                header("location: " . $escaped_url);
+            }
+            $stmt = "SELECT * FROM following WHERE following = '$ownUsername' AND username = '$username'";
+            //sjeker om det du følger denne personen
+            if (mysqli_num_rows(mysqli_query($link, $stmt)) > 0) {
+                $following = true;
+            }
+        } else {
+            header("location: ../profile/profile.php?username=" . $_SESSION['username']);
         }
-    }
-    if (isset($_POST['followUser'])) {
-        $following = true;
-        $stmt = "INSERT INTO following(following, username) VALUES('$ownUsername', '$username')";
-        mysqli_query($link, $stmt);
-    } else if (isset($_POST['unFollowUser'])) {
-        $following = false;
-        $stmt = "DELETE FROM following where following = '$ownUsername' AND username = '$username'";
-        mysqli_query($link, $stmt);
     }
 }
+if (isset($_GET['liked'])) {
+    if ($_GET['liked'] == 0) {
+        $likedPictures = true;
+    } else {
+        $likedPictures = false;
+    }
+}
+
+
+
 
 
 
@@ -92,52 +84,50 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <div class="right-navbar">
             <a class="menu" href="../browse/following.php"><img class="navbar-icon" src="../htmlBilder/house.png" alt="home"></a>
             <a class="menu" href="../browse/index.php"><img class="navbar-icon" src="../htmlBilder/browse.png" alt="explore"></a>
-                <a class="menu" href="../game/pong.php"><img class="navbar-icon" src="../htmlBilder/pong.png" alt="explore"></a>
-                <!--modal-->
-                <a class="menu" id="modalButton"><img class="navbar-icon" src="../htmlBilder/share-button.png" alt="upload picture"></a>
-                <div id="modalParent" onclick="hideModal(event)">
-                    <div id="modalChild">
-                        <form action="../process/sharePic.php" method="POST" enctype="multipart/form-data">
-                            <div class="modalTitleDiv">
-                                <h2 class = "modalTitle">Create a new post</h2>
-                                <input class="" id="uploadPicture" type="submit"  name="submit" value="Upload">
-                            </div>
-                            <div class="preview">
-                                <img style="display: none;" id="picturePreview">
-                            </div>
+            <a class="menu" href="../game/pong.php"><img class="navbar-icon" src="../htmlBilder/pong.png" alt="explore"></a>
+            <!--modal-->
+            <a class="menu" id="modalButton"><img class="navbar-icon" src="../htmlBilder/share-button.png" alt="upload picture"></a>
+            <div id="modalParent" onclick="hideModal(event)">
+                <div id="modalChild">
+                    <form action="../process/sharePic.php" method="POST" enctype="multipart/form-data">
+                        <div class="modalTitleDiv">
+                            <h2 class="modalTitle">Create a new post</h2>
+                            <input class="" id="uploadPicture" type="submit" name="submit" value="Upload">
+                        </div>
+                        <div class="preview">
+                            <img style="display: none;" id="picturePreview">
+                        </div>
 
-                            <label for="uploadInput" class="input submit" id="fileUpload"> Select from computer</label>
-                            <!--Live preview av bildet-->
-                            <input type="file" accept="image/*" onchange="showPreview(event);" id="uploadInput" name="file">
-                        </form>
-                    </div>
-                </div>
-                <div id="pfpRadius" class="dropdownElement pfpRadius">
-                    <img class="profilBildet" id="drop" src="<?php echo $_SESSION['profilePic']; ?>" alt="profile picture">
-                </div>
-
-
-                <div id="dropDown" class="shadow">
-                    <div class="dropContainer ">
-                        <a class="dropElement" href="../profile/profile.php">Profil</a>
-                        <a class="dropElement" href="../profile/profileEdit.php">Edit profile</a>
-                        <a class="dropElement" href="../process/logout.php">Log Out</a>
-                    </div>
+                        <label for="uploadInput" class="input submit" id="fileUpload"> Select from computer</label>
+                        <!--Live preview av bildet-->
+                        <input type="file" accept="image/*" onchange="showPreview(event);" id="uploadInput" name="file">
+                    </form>
                 </div>
             </div>
-        </div>
+            <div id="pfpRadius" class="dropdownElement pfpRadius">
+                <img class="profilBildet" id="drop" src="<?php echo $_SESSION['profilePic']; ?>" alt="profile picture">
+            </div>
+
 
             <div id="dropDown" class="shadow">
                 <div class="dropContainer ">
                     <a class="dropElement" href="../profile/profile.php">Profil</a>
                     <a class="dropElement" href="../profile/profileEdit.php">Edit profile</a>
+                    <a class="dropElement" href="../costumerSupport/tickets.php">Tickets</a>
+                    <?php
+                    $stmt = "SELECT * FROM USERS WHERE USERNAME = '$username'";
+                    if ($rad = mysqli_fetch_assoc(mysqli_query($link, $stmt))) {
+                        if (in_array($rad['role'], $answerTickets)) {
+                            echo '<a class="dropElement" href="../costumerSupport/openTicket.php">Answer tickets</a>';
+                        }
+                    }
+                    ?>
                     <a class="dropElement" href="../process/logout.php">Log Out</a>
                 </div>
             </div>
         </div>
     </div>
 
-    </div>
 
 
     <div class="whitespace"></div>
@@ -161,9 +151,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         } else {
                             $editOrFollow = '<a href="profileEdit.php" class="edit">Edit profile</a>';
                             if (!$likedPictures) {
-                                $likedEcho = "<a class = 'edit' id = 'likedOrOwn' onclick = seeLiked('0')> Liked pictures </a>";
+                                $likedEcho = "<a class = 'edit' id = 'likedOrOwn' href = 'profile.php?username=dsa&liked=0'> Liked pictures </a>";
                             } else {
-                                $likedEcho = "<a class = 'edit' id = 'likedOrOwn' onclick = seeLiked('1')> Posted pictures </a>";
+                                $likedEcho = "<a class = 'edit' id = 'likedOrOwn' href = 'profile.php?username=dsa&liked=1'> Posted pictures </a>";
                             }
                         }
                         echo $editOrFollow;
@@ -228,7 +218,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         ?>
     </div>
     <div class="whitespace"></div>
-    <p id="invisable"></p>
+    <p id="invisable">
+    </p>
 
 
     <script src="../script/ui.js"></script>

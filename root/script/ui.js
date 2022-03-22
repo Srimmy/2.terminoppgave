@@ -68,18 +68,18 @@ function searchExpansion(e) {
 //fant ut at jeg ikke kan ha 2 paremeter i php når jeg har en onclick function
 function sendTilProfil(username) {
     
-    writeForm("../profile/profile.php", "profileForm", "otherProfile", username, "username");
+    writeForm("../profile/profile.php", "profileForm", "otherProfile", username, "username", "get");
     console.log(username);
 }
 
 function follow(username) {
-    writeForm("../profile/profile.php", "followForm", "followUser", username, "username");
+    writeForm("../profile/profile.php", "followForm", "followUser", username, "username", "get");
 }
 function unFollow(username) {
-    writeForm("../profile/profile.php", "unFollowForm", "unFollowUser", username, "username");
+    writeForm("../profile/profile.php", "unFollowForm", "unFollowUser", username, "username", "get");
 }
 function deleteUser(username) {
-    writeForm("../process/deleteUser.php", "deleteUserForm", "deleteUser", username, "username");
+    writeForm("../process/deleteUser.php", "deleteUserForm", "deleteUser", username, "username", "post");
 }
 function confirmDelete(username) {
     let confirmAction = confirm('Are you sure you want to delete your account?');
@@ -91,23 +91,24 @@ function confirmDelete(username) {
 }
 function seeTicket(id) {
     console.log("cap");
-    writeForm("../costumerSupport/openTicket.php", "seeTicketForm", "seeTicket", id, "id");
+    writeForm("../costumerSupport/answerTicket.php", "seeTicketForm", "seeTicket", id, "id", "get");
 }
 
-function seeLiked(value) {
+function seeLiked(value, username) {
     console.log("caps");
     invisableEl.innerHTML = ''
-        + '<form action="../profile/profile.php" method ="POST" id = "likedForm">'
+        + '<form action="../profile/profile.php" method ="get" id = "likedForm">'
         + '<input class = "invisable" type = "text" name = "liked" value ="' + value + '">'
+        + '<input class = "invisable" type = "text" name = "username" value = "'+ username+'">'
         + ' </form>';
     document.getElementById("likedForm").submit();
 
 }
 //kan endre denne funksjonen slik at den blir universell etterhvert
 //da denne var document.write ble det flasha uten css
-function writeForm(php, id, name, value, postName) {
+function writeForm(php, id, name, value, postName, method) {
     invisableEl.innerHTML = ''
-        + '<form action="' + php + '" method ="POST" id = "' + id + '">'
+        + '<form action="' + php + '" method ="'+method+'" id = "' + id + '">'
         + '<input class = "invisable" type="text" name = '+ postName+' value=' + value + '>'
         + '<input class = "invisable" type = "text" name = "' + name + '" value ="0">'
         + ' </form>';
