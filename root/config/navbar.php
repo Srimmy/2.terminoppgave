@@ -66,7 +66,7 @@ switch (basename($_SERVER['PHP_SELF'])) {
             <div class="dropContainer ">
                 <a class="dropElement" href="../profile/profile.php">Profil</a>
                 <a class="dropElement" href="../profile/profileEdit.php">Edit profile</a>
-                <a class="dropElement" href="../costumerSupport/tickets.php">Tickets</a>
+                <a class="dropElement" href="../costumerSupport/costumerTickets.php">Tickets</a>
                 <?php
                 //ser om du har en rolle som lar deg se tickets
                 $stmt = "SELECT * FROM USERS WHERE USERNAME = '$username'";

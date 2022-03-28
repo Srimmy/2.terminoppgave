@@ -125,7 +125,7 @@ if (isset($_POST['like'])) {
                     <div class = 'addComment alignLeft'>  
                         <form method='POST' action='../process/kommentar.php'>
                             <input class = 'newComment' onkeypress='test($innleggTall)' type='text' name = 'newComment' placeholder='Add a comment..'>
-                            <input class = 'invisable' type='text' name = 'bildeId' value = '$bildetId'>
+                            <input class = 'invisable' readonly name = 'bildeId' value = '$bildetId'>
                             <input type = 'submit' name = 'submitComment' value = 'Post';>
                         </form>
                     </div>

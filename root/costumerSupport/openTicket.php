@@ -1,7 +1,10 @@
 <?php
 
 require_once "../config/config.php";
-
+if (!in_array($_SESSION['role'], $answerTickets)) {
+    header("location: ../costumerSupport/costumerTickets.php");
+    exit;
+}
 $username = $_SESSION['username'];
 
 ?>
@@ -19,7 +22,7 @@ $username = $_SESSION['username'];
 
 <body>
     <!-- navbar -->
-    <?php include("../config/navbar.php")?>
+    <?php include("../config/navbar.php") ?>
     <div class="whitespace"> </div>
 
     <div class="containerBody">
@@ -37,7 +40,7 @@ $username = $_SESSION['username'];
 
                 <?php
                 //henter alle tickets
-                $stmt = "SELECT * FROM ticket ORDER BY created_at asc";
+                $stmt = "SELECT * FROM ticket where status != 'solved' ORDER BY created_at asc";
                 if ($result = mysqli_query($link, $stmt)) {
                     while ($rad = mysqli_fetch_assoc($result)) {
                         $id = $rad['id'];

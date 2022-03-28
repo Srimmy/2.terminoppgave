@@ -1,3 +1,5 @@
+//la til readonly attribute slik at det ikke kan endres
+
 let pfpEl = document.getElementById("pfpRadius");
 let dropDownEl = document.getElementById("dropDown");
 let invisableEl = document.getElementById("invisable");

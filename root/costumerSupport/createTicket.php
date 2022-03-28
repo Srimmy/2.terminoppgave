@@ -25,7 +25,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     <div class="containerBody">
         <form action="sendTicket.php" method="POST" class="column">
             <label class="supportLabel" for="">Title</label>
-            <input class="supportTitle" required maxlength="100" name="title" ; type="text" placeholder="Keywords of your issue">
+            <input class="supportTitle" required maxlength="30" name="title" ; type="text" placeholder="Keywords of your issue">
             <label class="supportLabel" for="">Description</label>
             <textarea required class="supportDescription" name="desc" id="" cols="30" rows="10" placeholder="Explain your issue"></textarea>
             <input type="submit" value="Send ticket">

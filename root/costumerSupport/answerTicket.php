@@ -1,42 +1,51 @@
 <?php
 require_once "../config/config.php";
+$role = $_SESSION['role'];
 
 //henter ticket fra URL
 $stmt = "SELECT * FROM TICKET WHERE id = '" . $_GET['id'] . "'";
 $ticketUsername = mysqli_fetch_assoc(mysqli_query($link, $stmt))['user'];
-
-if (in_array($_SESSION['role'], $answerTickets) || $_SESSION['username'] == $ticketUsername) {
-    //case 2: du har en rolle som kan se tickets eller så er brukernavnet ditt den som skrev ticketen
-    if ($_SESSION['username'] == $ticketUsername) {
-        $role = "Author";
-    }
-} else {
-    //case 3: du er logget inn men har ikke rolle og brukernavnet passer ikke
+$support = false;
+switch ($_SERVER['REQUEST_METHOD']) {
+    case 'GET':
+        //case 1: du har fått GET i URL
+        $id = $_GET['id'];
+        $stmt  = "SELECT * FROM TICKET WHERE id = '$id'";
+        if ($rad = mysqli_fetch_assoc(mysqli_query($link, $stmt))) {
+            //case a: ticketen finnes
+            $title = $rad['keyword'];
+            $desc = $rad['description'];
+            $asker = $rad['user'];
+            $stmt = "SELECT * FROM users WHERE username = '$asker'";
+            if ($rad1 = mysqli_fetch_assoc(mysqli_query($link, $stmt))) {
+                $profilePicPath = $rad1['profilePicPath'];
+                break;
+            }
+        } else {
+            //case b: ticketen finnes ikke
+            header("location: ../costumerSupport/openTicket.php");
+        }
+    case 'POST':
+        //case 2: det er en POST, 
+        $stmt = "UPDATE ticket set status = 'solved' where id = '" . $_POST['id'] . "'";
+        mysqli_query($link, $stmt);
+        header("location: ../costumerSupport/costumerTickets.php");
+        break;
+    default:
+        //case 3: det er ingen GET eller POSt
+        var_dump($_POST);
+        header("location: ../browse/index.php");
+}
+if ($_SESSION['username'] == $ticketUsername) {
+    //sluttbrukeren som lagde ticketen vil se den
+    $role = "Author";
+} else if (in_array($_SESSION['role'], $answerTickets)) {
+    //support ser ticket
+    $support = true;
+} else if (!$_POST) {
+    // verken rolle eller brukernavn passer
     header("location: ../browse/index.php");
     exit;
-}
-
-//henter fra URL
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    //case 1: du har fått GET i URL
-    $id = $_GET['id'];
-    $stmt  = "SELECT * FROM TICKET WHERE id = '$id'";
-    if ($rad = mysqli_fetch_assoc(mysqli_query($link, $stmt))) {
-        //case 1: ticketen finnes
-        $title = $rad['keyword'];
-        $desc = $rad['description'];
-        $asker = $rad['user'];
-        $stmt = "SELECT * FROM users WHERE username = '$asker'";
-        if ($rad1 = mysqli_fetch_assoc(mysqli_query($link, $stmt))) {
-            $profilePicPath = $rad1['profilePicPath'];
-        }
-    } else {
-        //case 2: ticketen finnes ikke
-        header("location: ../costumerSupport/openTicket.php");
-    }
-} else {
-    //case 2: det er ingen GET
-    header("location: ../browse/index.php");
 }
 
 //lager url til dette stedet, for senere bruk
@@ -64,23 +73,23 @@ $escaped_url = htmlspecialchars($url, ENT_QUOTES, 'UTF-8');
             $result = mysqli_query($link, $stmt);
             $answerer = mysqli_fetch_assoc($result)['answerer'];
             //legger til informasjon til form, brukes senere på submit
-            $sendURL = '<input class = "invisable" value = "' . $escaped_url . '" name = "url">';
-            $sendID =  '<input class = "invisable" value = "' . $id . '" name = "id">';
-            if (isset($answerer)) {
-                //case 1: noen har satt seg selv om svarer til ticketen
-                if ($answerer == $_SESSION['username']) {
-                    //case 1: du er den som er satt
-                    echo '<input type="submit" value=" Unassign" name = "unAssign">';
+            $sendURL = '<input class = "invisable" readonly value = "' . $escaped_url . '" name = "url">';
+            $sendID =  '<input class = "invisable" readonly value = "' . $id . '" name = "id">';
+            if ($support) {
+                if (isset($answerer)) {
+                    //case 1: noen har satt seg selv om svarer til ticketen
+                    if ($answerer == $_SESSION['username']) {
+                        //case 1: du er den som er satt
+                        echo '<input type="submit" value=" Unassign" name = "unAssign">';
+                    } else {
+                        //case 2: noen andre er satt
+                        echo '<h5' . mysqli_fetch_assoc($result)['answerer'] . ' is assigned</h5>';
+                    }
                 } else {
-                    //case 2: noen andre er satt
-                    echo '<h5' . mysqli_fetch_assoc($result)['answerer'] . ' is assigned</h5>';
+                    //case 2: ingen er satt
+                    echo '<input type="submit" value="Assign yourself" name = "assign">';
                 }
-            } else {
-                //case 2: ingen er satt
-                echo '<input type="submit" value="Assign yourself" name = "assign">';
             }
-            echo $sendURL;
-            echo $sendID;
             ?>
 
         </form>
@@ -134,16 +143,24 @@ $escaped_url = htmlspecialchars($url, ENT_QUOTES, 'UTF-8');
                 <h5><?php echo $_SESSION['username'] ?> <br> <span><?php echo $role; ?></span></h5>
                 <form action="ticketreply.php" id="replyForm" method="POST">
                     <textarea required class="" name="reply" id="" cols="30" rows="10" placeholder="Write here"></textarea>
-                    <input type="text" name="id" class="invisable" value="<?php echo $id; ?>">
-                    <input type="text" name="url" class="invisable" value="<?php echo $escaped_url ?>">
+                    <input readonly name="id" class="invisable" value="<?php echo $id; ?>">
+                    <input readonly name="url" class="invisable" value="<?php echo $escaped_url ?>">
 
                 </form>
                 <div class="row">
                     <input type="submit" form="replyForm" value="Send reply">
-                    <form action="">
-                        <input type="submit" value="Mark as completed">
-                    </form>
+                    <?php
+                    if ($role == "Author") {
+                        //legger til 'mark as complete' button
+                        echo '                
+                    <form action="answerTicket.php" method = "POST">
+                        <input readonly name = "id" class = "invisable" value = "' . $id . '" >
+                        <input type="submit" name "ticketSolved" value="Mark as solved">
+                    </form>';
+                    } ?>
+
                 </div>
+
 
             </div>
 
