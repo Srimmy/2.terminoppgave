@@ -37,3 +37,4 @@ Når brukere slettes legger du til en verdi i tabellen der det står "deleted", 
 FIX CSS I NAVBAR MED SPACE INBETWEEN I EN DIV SLIK AT DE IKKE OVERLAPPER NÅR DE BLIR MINDRE.
 
 Legg i 2 forms i stedet for 1 i profileedit slik at jeg kan fjerner restrict enter i JS.
+legg til preview i bildet i profilbildet stedet

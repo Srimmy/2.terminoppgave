@@ -73,8 +73,8 @@ $escaped_url = htmlspecialchars($url, ENT_QUOTES, 'UTF-8');
             $result = mysqli_query($link, $stmt);
             $answerer = mysqli_fetch_assoc($result)['answerer'];
             //legger til informasjon til form, brukes senere på submit
-            $sendURL = '<input class = "invisable" readonly value = "' . $escaped_url . '" name = "url">';
-            $sendID =  '<input class = "invisable" readonly value = "' . $id . '" name = "id">';
+            echo '<input class = "invisable" readonly value = "' . $escaped_url . '" name = "url">';
+            echo '<input class = "invisable" readonly value = "' . $id . '" name = "id">';
             if ($support) {
                 if (isset($answerer)) {
                     //case 1: noen har satt seg selv om svarer til ticketen

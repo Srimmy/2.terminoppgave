@@ -22,7 +22,7 @@ if ($result = mysqli_query($link, $stmt)) {
     <!-- navbar -->
     <div class="navbar">
         <div class="left-navbar">
-            <img src="../htmlBilder/logo.png" alt="logo" class="logo">
+            <img src="../htmlBilder/logo.svg" alt="logo" class="logo">
         </div>
                 <form method="GET" class="row searchForm"  action='search.php'>
             <div id="search" style="width: 15vw">

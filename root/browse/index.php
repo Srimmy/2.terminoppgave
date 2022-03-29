@@ -4,6 +4,7 @@ require_once "../config/config.php";
 //ser om du er logget inn
 $followPage = false;
 $username = $_SESSION["username"];
+$following_err = "";
 
 ?>
 
@@ -20,7 +21,7 @@ $username = $_SESSION["username"];
 
 <body>
 
-    <?php include("../config/navbar.php")?>
+    <?php include("../config/navbar.php") ?>
     <div class="whitespace"> </div>
 
 
@@ -40,13 +41,13 @@ $username = $_SESSION["username"];
                     $usernamePic = $rad['brukernavn'];
                     //elementet som skal vises
                     $bildeEl = "<div class = 'item center pointer' onClick = sendTilProfil('$usernamePic') > 
-                                    <div class = 'bilder'> 
-                                    <div class = 'blackbox'>
-                                    </div >
-                                        <img src = $path alt = 'bildet'> 
-                                    </div> 
-                                    
-                                </div> ";
+                                        <div class = 'bilder'> 
+                                        <div class = 'blackbox'>
+                                        </div >
+                                            <img src = $path alt = 'bildet'> 
+                                        </div> 
+                                        
+                                    </div> ";
                     echo $bildeEl;
                 }
             }

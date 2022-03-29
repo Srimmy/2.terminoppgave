@@ -9,6 +9,7 @@
 require_once "../config/config.php";
 $followPage = false;
 $username = $_SESSION["username"];
+$following_err = "";
 
 
 //kjører hvis du trykker på like knappen
@@ -49,18 +50,24 @@ if (isset($_POST['like'])) {
 <body>
 
     <!-- navbar -->
-    <?php include("../config/navbar.php")?>
+    <?php include("../config/navbar.php") ?>
 
 
     <div class="whitespace"></div>
 
     <!--Bildet feed-->
     <div class="container containerBody">
+
         <?php
+
         //finner bilder fra de du follower
         $stmt = "SELECT * FROM FOLLOWINGBILDER WHERE FOLLOWING = '$username'";
         if ($result = mysqli_query($link, $stmt)) {
             $innleggTall = 0;
+            if (mysqli_num_rows($result) == 0) {
+                $following_err = "<h2>You are currently not following anyone. Go out there and <a href='../browse/index.php' class = 'link'>explore!</a></h2>";
+                echo "<h2> $following_err </h2>";
+            }
             //kjører loop for hver rad i databasen
             while ($rad = mysqli_fetch_assoc($result)) {
                 $like = false;

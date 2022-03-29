@@ -151,7 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                     <img class="bigPfp" src=" <?php echo $_SESSION['profilePic'] ?>" alt="">
                 </div>
                 <div>
-                    <input class="file" type="file" name="file">
+                    <input class="file" type="file" name="file" onchange="pfpPreview(event);"'>
                     <input class="input submit" id="pfpSubmit" type="submit" name="pfpChange" value="Change">
                     <p class="note"> <?php echo $upload_err; ?></p>
                 </div>

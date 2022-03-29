@@ -6,6 +6,7 @@ $pongSrc = "../htmlBilder/pong.png";
 $logout = "Log Out";
 
 switch (basename($_SERVER['PHP_SELF'])) {
+    //endrer ikon samsvarende med hvilken side det er 
     case "following.php":
         $followingSrc = "../htmlBilder/house-reverse.png";
         break;
@@ -18,15 +19,24 @@ switch (basename($_SERVER['PHP_SELF'])) {
         $_SESSION['profilePic'] = "../profilbilder/standard.svg";
         break;
     case "pong.php":
-        $followingSrc = "../htmlBilder/pong-reverse.png";
+        $pongSrc = "../htmlBilder/pong-reverse.png";
         break;
+    case "faq.php":
+        if(isset($_SESSION["loggedin"])) {
+            $username = $_SESSION['username'];
+        } else{
+            $username = '';
+            $logout = "Log In";
+            $_SESSION['profilePic'] = "../profilbilder/standard.svg";
+        }
+
 }
 
 ?>
 <link rel="stylesheet" href="../css/style.css">
 <div class="navbar">
     <div class="left-navbar">
-        <img src="../htmlBilder/logo.png" alt="logo" class="logo">
+        <img src="../htmlBilder/logo.svg" alt="logo" class="logo">
     </div>
     <form method="GET" class="row searchForm" action='../browse/search.php'>
         <div id="search" style="width: 15vw">

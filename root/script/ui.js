@@ -12,6 +12,7 @@ let modalButtonEl = document.getElementById('modalButton');
 let modalParentEl = document.getElementById('modalParent');
 let modalChildEl = document.getElementById('modalChild');
 let uploadPictureEl = document.getElementById('uploadPicture');
+let preview = document.getElementById("picturePreview");
 
 console.log(modalButtonEl);
 modalButtonEl.addEventListener("click", showModal);
@@ -21,13 +22,7 @@ function showModal() {
     modalChildEl.style.animation = 'modalIntro 0.02s';
 }
 
-function hideModal(e) {
-    console.log(e.target.id);
-    if(e.target.id == 'modalParent') {
-        modalParentEl.style.display = 'none';
-    }
-    console.log(e.target.id);
-}
+
 
 document.body.addEventListener("click", pfpDropdown)
 dropDownEl.style.display = "none"
@@ -55,7 +50,7 @@ function searchExpansion(e) {
             }
         }
     }
-        //gjør at man går til søkefeltet (inputen)
+    //gjør at man går til søkefeltet (inputen)
     if (e.target.id == 'søkeBildet' || e.target.id == 'search') {
         searchTextEl.focus();
         searchTextEl.select();
@@ -69,7 +64,7 @@ function searchExpansion(e) {
 //får en error dersom jeg endrer bare bruker writeForm istedet for 2 funksjoner
 //fant ut at jeg ikke kan ha 2 paremeter i php når jeg har en onclick function
 function sendTilProfil(username) {
-    
+
     writeForm("../profile/profile.php", "profileForm", "otherProfile", username, "username", "get");
     console.log(username);
 }
@@ -101,7 +96,7 @@ function seeLiked(value, username) {
     invisableEl.innerHTML = ''
         + '<form action="../profile/profile.php" method ="get" id = "likedForm">'
         + '<input class = "invisable" type = "text" name = "liked" value ="' + value + '">'
-        + '<input class = "invisable" type = "text" name = "username" value = "'+ username+'">'
+        + '<input class = "invisable" type = "text" name = "username" value = "' + username + '">'
         + ' </form>';
     document.getElementById("likedForm").submit();
 
@@ -110,8 +105,8 @@ function seeLiked(value, username) {
 //da denne var document.write ble det flasha uten css
 function writeForm(php, id, name, value, postName, method) {
     invisableEl.innerHTML = ''
-        + '<form action="' + php + '" method ="'+method+'" id = "' + id + '">'
-        + '<input class = "invisable" type="text" name = '+ postName+' value=' + value + '>'
+        + '<form action="' + php + '" method ="' + method + '" id = "' + id + '">'
+        + '<input class = "invisable" type="text" name = ' + postName + ' value=' + value + '>'
         + '<input class = "invisable" type = "text" name = "' + name + '" value ="0">'
         + ' </form>';
     document.getElementById(id.toString()).submit();
@@ -161,19 +156,47 @@ function restrictSearch(e) {
     }
 }
 
+
+
 uploadPictureEl.disabled = true;
 //live preview av bildet når man velger path i modalen
-function showPreview(event){
-    if(event.target.files.length > 0){
-      var src = URL.createObjectURL(event.target.files[0]);
-      var preview = document.getElementById("picturePreview");
-      preview.src = src;
-      preview.style.display = "block";
-      uploadPictureEl.disabled = false;
-      uploadPictureEl.style.cursor = "pointer";
-      uploadPictureEl.style.color = "#149df7";
+function showPreview(event) {
+    if (event.target.files.length > 0) {
+        //skaper preview
+        var src = URL.createObjectURL(event.target.files[0]);
+        preview.src = src;
+        preview.style.display = "block";
+        uploadPictureEl.disabled = false;
+        uploadPictureEl.style.cursor = "pointer";
+        uploadPictureEl.style.color = "#149df7";
+        document.getElementById("fileUpload").style.display = 'none';
     }
-  }
+}
+//fjerner input fra baren
+function hideModal(e) {
+    if (e.target.id == 'modalParent') {
+        if (confirm("capp my ass off")) {
+            modalParentEl.style.display = 'none';
+            console.log(document.getElementById("uploadInput").value)
+            document.getElementById("uploadInput").value = '';
+            uploadPictureEl.disabled = true;
+            uploadPictureEl.style.cursor = "default";
+            preview.src = '';
+            preview.style.display = 'none';
+            uploadPictureEl.style.color = "rgb(168, 168, 168)";
+            console.log(document.getElementById("uploadInput").value)
+            document.getElementById("fileUpload").style.display = 'block';
+        }
+    }
+}
+
+function pfpPreview(e) {
+    if (e.target.files.length > 0) {
+        var src = URL.createObjectURL(e.target.files[0]);
+        document.getElementsByClassName("bigPfp")[0].src = src;
+        console.log("tes");
+    }
+}
 
 
 function test() {
