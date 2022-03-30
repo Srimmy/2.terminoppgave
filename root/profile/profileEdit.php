@@ -56,13 +56,14 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                             update bilder set brukernavn = '$newUsername' where brukernavn = '$username';
                             update following set username = '$newUsername' where username = '$username';
                             update following set following = '$newUsername' where following = '$username';
-                            update kommentar set username = '$newUsername' where brukernavn = '$username';
+                            update kommentar set brukernavn = '$newUsername' where brukernavn = '$username';
                             update kommentar set brukernavn = '$newUsername' where brukernavn = '$username';
                             update liktebilder set username = '$newUsername' where username = '$username';
                             ";
                 if (mysqli_multi_query($link, $stmt)) {
                     $valid_err = "Successfull Change";
                     $_SESSION['username'] = $newUsername;
+                    header("location: profileEdit.php");
                 } else {
                     $valid_err = "Something went wrong. Please try again later.";
                 }
@@ -165,12 +166,12 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         </form>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
             <div class="inputDiv">
-                <input class="input gap" type="password" id='password' name="password" placeholder="Password">
-                <input class="input" type="password" id='newPassword' name="newPassword" placeholder="New password">
-                <input class="input" type="password" id='confirmPassword' name="confirmPassword" placeholder="Confirm password">
-                <input class="input submit" type="submit" value="Change password" name="changePassword">
-                <p class="note"> <?php echo $username_err, $password_err; ?> <span class="successful"> <?php echo $valid_err; ?></span></p>
-            </div>
+                <input class="input gap" type="password" id=' password' name="password" placeholder="Password">
+                    <input class="input" type="password" id='newPassword' name="newPassword" placeholder="New password">
+                    <input class="input" type="password" id='confirmPassword' name="confirmPassword" placeholder="Confirm password">
+                    <input class="input submit" type="submit" value="Change password" name="changePassword">
+                    <p class="note"> <?php echo $username_err, $password_err; ?> <span class="successful"> <?php echo $valid_err; ?></span></p>
+                </div>
         </form>
         <div class="inputDiv">
             <?php

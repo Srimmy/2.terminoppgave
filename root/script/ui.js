@@ -175,7 +175,7 @@ function showPreview(event) {
 //fjerner input fra baren
 function hideModal(e) {
     if (e.target.id == 'modalParent') {
-        if (confirm("capp my ass off")) {
+        if (confirm("Do you really want to discard all information about the post?")) {
             modalParentEl.style.display = 'none';
             console.log(document.getElementById("uploadInput").value)
             document.getElementById("uploadInput").value = '';
