@@ -59,6 +59,10 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                             update kommentar set brukernavn = '$newUsername' where brukernavn = '$username';
                             update kommentar set brukernavn = '$newUsername' where brukernavn = '$username';
                             update liktebilder set username = '$newUsername' where username = '$username';
+                            update ticket set username = '$newUsername' where username = '$username';
+                            update ticket set answerer = '$newUsername' where answerer = '$username';
+                            update ticket set username = '$newUsername' where username = '$username';
+                            update ticket set username = '$newUsername' where username = '$username';
                             ";
                 if (mysqli_multi_query($link, $stmt)) {
                     $valid_err = "Successfull Change";

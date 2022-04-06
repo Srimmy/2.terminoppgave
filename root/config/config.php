@@ -24,10 +24,30 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     }
 } else if (isset($_SESSION['username']) && $_SESSION['loggedin'] === true) {
     //case 2: du er logget inn
+    $username = $_SESSION['username'];
     if (basename($_SERVER['PHP_SELF']) == "browse.php" || basename($_SERVER['PHP_SELF']) == "login.php" && basename($_SERVER['PHP_SELF']) == "register.php") {
         //logger deg inn
         header("location: index.php?alreadyloggedin");
+        $username = '';
         exit;
     }
 }
-?>
+
+if (isset($_GET['k']) && $_GET['k'] != '') {
+    //gjør at ' k ' blir til 'k'
+    $k = trim(mysqli_real_escape_string($link, $_GET['k']));
+    //keyword blir en array der hvert element blir separert med et mellomrom
+    //"hei du" -> $keyword[0] = hei, $keyword[1] = du
+    $keywords = explode(' ', $k);
+
+    //query
+    $searchStmt = "SELECT * FROM USERS WHERE";
+    foreach ($keywords as $word) {
+        $searchStmt .= " username like '%" . $word . "%' OR ";
+        $display_words = "";
+    }
+
+    //fjerner den siste "OR" fra stringen for å ikke få feil
+    //fjerner de siste 3 bokstavene fra stringen.
+    $searchStmt = substr($searchStmt, 0, strlen($searchStmt) - 3);
+}

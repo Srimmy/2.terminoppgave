@@ -67,6 +67,7 @@ switch (basename($_SERVER['PHP_SELF'])) {
                 </form>
             </div>
         </div>
+        <a class="menu" href="../costumerSupport/faq.php"><img class="navbar-icon" src="../htmlBilder/brukerstotte.svg" alt="explore"></a>
         <div id="pfpRadius" class="dropdownElement pfpRadius">
             <img class="profilBildet" id="drop" src="<?php echo $_SESSION['profilePic']; ?>" alt="profile picture">
         </div>

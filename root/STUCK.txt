@@ -1,9 +1,7 @@
-LEGG TIL TICKET DATABASE I DOKUMENTASJOn
+
 
 Muligens en private account funksjon og en følge funksjon. 
     (true / false i $_SESION[private])
-
-
 
 
 Kommentarfelt: lage slik instagram har det -> de har en modal der bildet blir til venstre
@@ -12,7 +10,6 @@ Kommentarfelt: lage slik instagram har det -> de har en modal der bildet blir ti
 
 
 regex
-CCS i search er hella cap.
 
 LAG DOKUMNTASJON
 personven
@@ -21,7 +18,6 @@ opphavsred
 lovdata som søkefelt
 
 Gjør at når du opploader bilder så blir det enten laget en folder som er brukernavnet ditt og hvis det finnes så legges det inn der.
-
 
 spør lars om brannmur
 spør mailil om problem med apache og mysqli_
@@ -32,9 +28,12 @@ Bruk websocket for å oppdatere siden uten å måtte refreshe
 
 se vurderings matrise
 sett opp mer odkumentasjon som brukere til sql (muligens passord)
-Når brukere slettes legger du til en verdi i tabellen der det står "deleted", dermed kan du ta en if statement select * from users where !deleted" eller noe 
 
 FIX CSS I NAVBAR MED SPACE INBETWEEN I EN DIV SLIK AT DE IKKE OVERLAPPER NÅR DE BLIR MINDRE.
 
 Legg i 2 forms i stedet for 1 i profileedit slik at jeg kan fjerner restrict enter i JS.
 legg til preview i bildet i profilbildet stedet
+
+mulige improvements:
+-Kan gjerne faqbilder ved å legge til et bildecolumn i faq. Bildene blir da splittet ved bruk av explode og et tegn.
+-Legge til tags på flere ting slik at jeg kan sortere og gjøre mer brukervennlig

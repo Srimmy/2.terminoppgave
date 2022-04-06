@@ -83,7 +83,7 @@ $escaped_url = htmlspecialchars($url, ENT_QUOTES, 'UTF-8');
                         echo '<input type="submit" value=" Unassign" name = "unAssign">';
                     } else {
                         //case 2: noen andre er satt
-                        echo '<h5' . mysqli_fetch_assoc($result)['answerer'] . ' is assigned</h5>';
+                        echo '<h5>' . $answerer . ' is assigned</h5>';
                     }
                 } else {
                     //case 2: ingen er satt
