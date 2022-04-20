@@ -16,7 +16,7 @@ $profilePic = $_SESSION['profilePic'];
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
     if (!($_GET['username'] == $_SESSION['username'])) {
         $username = $_GET['username'];
-        $stmt = "SELECT * FROM USERS WHERE USERNAME = '$username'";
+        $stmt = "select * from users WHERE username = '$username'";
         //annen sin profil
         if (mysqli_num_rows($result = mysqli_query($link, $stmt)) == 1) {
             $profilePic = mysqli_fetch_assoc($result)['profilePicPath'];
@@ -106,7 +106,7 @@ if (isset($_GET['liked'])) {
 
                 <p>
                     <?php
-                    $stmt = "SELECT * FROM BILDER WHERE brukernavn = '$username'";
+                    $stmt = "select * from bilder WHERE brukernavn = '$username'";
                     if ($result = mysqli_query($link, $stmt)) {
                         if (($rows = mysqli_num_rows($result)) > 0) {
                             echo $rows;

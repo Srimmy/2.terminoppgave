@@ -41,7 +41,7 @@ if (isset($_GET['k']) && $_GET['k'] != '') {
     $keywords = explode(' ', $k);
 
     //query
-    $searchStmt = "SELECT * FROM USERS WHERE";
+    $searchStmt = "select * from users WHERE";
     foreach ($keywords as $word) {
         $searchStmt .= " username like '%" . $word . "%' OR ";
         $display_words = "";

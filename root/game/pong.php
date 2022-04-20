@@ -73,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_SESSION['loggedin']) { //vetner p√
                 </tr>
                 <?php
                 //leaderboard
-                $stmt = "SELECT * FROM USERS WHERE HIGHSCORE > 0 ORDER BY HIGHSCORE DESC ";
+                $stmt = "select * from users WHERE HIGHSCORE > 0 ORDER BY HIGHSCORE DESC ";
                 $rank = 1;
                 if ($resultat = mysqli_query($link, $stmt)) {
                     while ($rad = mysqli_fetch_assoc($resultat)) {

@@ -30,7 +30,7 @@ $following_err = "";
         <?php
 
         //henter alle bilder som noen gang har blitt lagt ut
-        $stmt = "SELECT * FROM BILDER";
+        $stmt = "select * from bilder";
         if ($result = mysqli_query($link, $stmt)) {
             //finner mengden bilder som finnes, altså rows i databasen
             if ($bildeCount = mysqli_num_rows($result)) {

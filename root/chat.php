@@ -2,7 +2,7 @@
 require_once "../config/config.php";
 
 
-$stmt = "SELECT * FROM USERS";
+$stmt = "select * from users";
 if ($result = mysqli_query($link, $stmt)) {
 }
 ?>

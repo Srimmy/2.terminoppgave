@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             $username_err = "Username can only contain letters, numbers and underscores.";
         } else {
             //ser om brukernavnet finnes
-            $stmt = "SELECT * FROM USERS WHERE username = '$newUsername'";
+            $stmt = "select * from users WHERE username = '$newUsername'";
             //definerer både $row og $result slik at jeg kan hente informasjon fra tabellen samtiig som jeg kan bruke $result til å sjekke hvor mange rader d er.
             if ($row = mysqli_fetch_assoc($result = mysqli_query($link, $stmt))) {
                 if (mysqli_num_rows($result) == 1  && !($row['id'] == $_SESSION['id'])) {
@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                 }
             } else {
                 $stmt =    "
-                            update USERS set username = '$newUsername' where id = '$id';
+                            update users set username = '$newUsername' where id = '$id';
                             update bilder set brukernavn = '$newUsername' where brukernavn = '$username';
                             update following set username = '$newUsername' where username = '$username';
                             update following set following = '$newUsername' where following = '$username';

@@ -80,7 +80,7 @@ switch (basename($_SERVER['PHP_SELF'])) {
                 <a class="dropElement" href="../costumerSupport/costumerTickets.php">Tickets</a>
                 <?php
                 //ser om du har en rolle som lar deg se tickets
-                $stmt = "SELECT * FROM USERS WHERE USERNAME = '$username'";
+                $stmt = "select * from users WHERE username = '$username'";
                 if ($rad = mysqli_fetch_assoc(mysqli_query($link, $stmt))) {
                     if (in_array($rad['role'], $answerTickets)) {
                         echo '<a class="dropElement" href="../costumerSupport/openTicket.php">Answer tickets</a>';

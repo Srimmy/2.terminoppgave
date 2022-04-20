@@ -61,7 +61,7 @@ if (isset($_POST['like'])) {
         <?php
 
         //finner bilder fra de du follower
-        $stmt = "SELECT * FROM FOLLOWINGBILDER WHERE FOLLOWING = '$username'";
+        $stmt = "SELECT * FROM followingBilder WHERE FOLLOWING = '$username'";
         if ($result = mysqli_query($link, $stmt)) {
             $innleggTall = 0;
             if (mysqli_num_rows($result) == 0) {
@@ -77,7 +77,7 @@ if (isset($_POST['like'])) {
                 $bildetId = $rad['id'];
 
                 //henter profilbildet
-                $stmt = "SELECT * FROM USERS WHERE USERNAME = '$usernamePic'";
+                $stmt = "SELECT * FROM users WHERE username = '$usernamePic'";
                 $userPfp = mysqli_fetch_assoc(mysqli_query($link, $stmt))['profilePicPath'];
 
                 //skriver 1/3 av html, bare bruker, profilbildet og innlegget
@@ -106,12 +106,12 @@ if (isset($_POST['like'])) {
                 }
 
                 //henter kommentarer på bildet
-                $stmt = "SELECT * FROM kommentarpåbildet where bildeid = '$bildetId'";
+                $stmt = "SELECT * FROM kommentarpåbildet where bildeId = '$bildetId'";
                 if ($result2 = mysqli_query($link, $stmt)) {
                     while ($rad2 = mysqli_fetch_assoc($result2)) {
                         $kommentar = $rad2['kommentar'];
                         $kommentarBruker = $rad2['brukernavn'];
-                        $stmt = "SELECT * FROM USERS WHERE USERNAME = '$kommentarBruker'";
+                        $stmt = "select * from users WHERE username = '$kommentarBruker'";
                         $result3 = mysqli_query($link, $stmt);
                         $brukerInfo = mysqli_fetch_assoc($result3);
                         $pfp = $brukerInfo['profilePicPath'];

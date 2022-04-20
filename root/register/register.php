@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $username_err = "Username can only contain letters, numbers and underscores.";
     } else {
         //ser om brukernavnet finnes
-        $stmt = "SELECT * FROM USERS WHERE username = '$username'";
+        $stmt = "select * from users WHERE username = '$username'";
         if ($result = mysqli_query($link, $stmt)) {
             if (mysqli_num_rows($result) > 0) {
                 $username_err = "Username already exists.";
@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $password_err = "Password does not match.";
                 } else {
                     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-                    $stmt = "INSERT INTO USERS (username, password, profilePicPath) VALUES ('$username', '$hashedPassword', '../profilbilder/standard.svg')";
+                    $stmt = "INSERT INTO users (username, password, profilePicPath) VALUES ('$username', '$hashedPassword', '../profilbilder/standard.svg')";
                     if (mysqli_query($link, $stmt)) {
                         header("location: login.php");
                     } else {

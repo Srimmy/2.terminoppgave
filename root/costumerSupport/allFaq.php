@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once('../config/config.php')
 
 ?>
@@ -14,16 +14,28 @@ require_once('../config/config.php')
 </head>
 
 <body>
+    <?php include('../config/navbar.php') ?>
+    <div class="whitespace"></div>
+    <div class="containerBody faq">
+
+        <div class="faqArticle">
+            <?php
+            $stmt = "SELECT * FROM faq";
+            if ($result = mysqli_query($link, $stmt)) {
+                while ($rad = mysqli_fetch_assoc($result)) {
+                    //endrer %20% til - i url
+                    $urlTitle = str_replace(' ', '-', $rad['title']);
+                    echo "<a href='http://localhost/dashboard/terminoppgave/root/costumerSupport/faqArticle.php?title=" . $urlTitle . "'>" . $rad['title'] . "</a> <br>";
+                }
+            } ?>
+            <div class="bottomWhiteSpace"></div>
+
+        </div>
+    </div>
+
+    <script src="../script/ui.js"></script>
     <div class="containerBody">
-        <?php
-        $stmt = "SELECT * FROM faq";
-        if ($result = mysqli_query($link, $stmt)) {
-            while ($rad = mysqli_fetch_assoc($result)) {
-                //endrer %20% til - i url
-                $urlTitle = str_replace(' ', '-', $rad['title']);
-                echo "<a href='http://localhost/dashboard/terminoppgave/root/costumerSupport/faqArticle.php?title=" . $urlTitle . "'>" . $rad['title'] . "</a> <br>";
-            }
-        } ?>
+
     </div>
 
 </body>

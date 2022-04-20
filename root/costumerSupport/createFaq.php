@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     echo "MÅ LEGGE TIL TITLE I STMT OG HELE FAQ POST DRITEN <br>";
     $title = mysqli_real_escape_string($link, $_POST['title']);
     $contents = mysqli_real_escape_string($link, $_POST['contents']);
-    $stmt = "SELECT * FROM FAQ WHERE title = '$title'";
+    $stmt = "select * from faq WHERE title = '$title'";
     $result = mysqli_query($link, $stmt);
     if (mysqli_num_rows($result) == 0) {
         $stmt = "INSERT INTO faq (title, contents) VALUES ('$title', '$contents')";

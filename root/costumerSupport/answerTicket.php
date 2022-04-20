@@ -3,14 +3,14 @@ require_once "../config/config.php";
 $role = $_SESSION['role'];
 
 //henter ticket fra URL
-$stmt = "SELECT * FROM TICKET WHERE id = '" . $_GET['id'] . "'";
+$stmt = "select * from ticket WHERE id = '" . $_GET['id'] . "'";
 $ticketUsername = mysqli_fetch_assoc(mysqli_query($link, $stmt))['user'];
 $support = false;
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
         //case 1: du har fått GET i URL
         $id = $_GET['id'];
-        $stmt  = "SELECT * FROM TICKET WHERE id = '$id'";
+        $stmt  = "select * from ticket WHERE id = '$id'";
         if ($rad = mysqli_fetch_assoc(mysqli_query($link, $stmt))) {
             //case a: ticketen finnes
             $title = $rad['keyword'];
@@ -115,7 +115,7 @@ $escaped_url = htmlspecialchars($url, ENT_QUOTES, 'UTF-8');
                 $reply = $rad['reply'];
                 $replyer = $rad['username'];
                 $time = $rad['created_at'];
-                $replyerInfo = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM USERS WHERE username = '$replyer'"));
+                $replyerInfo = mysqli_fetch_assoc(mysqli_query($link, "select * from users WHERE username = '$replyer'"));
 
                 echo ' <div class="row  threadDiv">
                 <div class="writer">
