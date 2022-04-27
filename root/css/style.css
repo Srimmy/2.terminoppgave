@@ -265,6 +265,7 @@ th {
 }
 .profilBildet {
     width: 30px;
+    height: 30px;
     display: inline-block;
 }
 
@@ -345,8 +346,8 @@ img {
 
 .bigPfpRadius {
     background-color: white;
-    width: 15vh;
-    height: 15vh;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     overflow: hidden;
     margin-left: 10%;
@@ -354,7 +355,8 @@ img {
 }
 
 .bigPfp {
-    width: 100%;
+    width: 150px;
+    height: 150px;
 }
 .blackbox {
     opacity: 0;
@@ -702,6 +704,10 @@ input[type = "submit"]:disabled {
     overflow: hidden;
     position: absolute;
 }
+.ticketActualPfp {
+    width: 50px;
+    height: 50px;
+}
 .writer {
     width: 5%;
     display:flex;
@@ -851,10 +857,14 @@ label.faqSearch{
 }
 .faqBackground {
     width: 100%;
-    background: url(../htmlBilder/faq.jpg);
+    background: url(../bilder/htmlBilder/faq.jpg);
     background-size: 100%;
     height: 500px;
     background-repeat: no-repeat;
+}
+.addFaq {
+    position: absolute;
+    margin-left: 58.5%;
 }
 
 

@@ -1,2 +1,2 @@
 <?php
-header('location: root/browse/index.php?');
+header('location: root/php/browse/index.php?');
