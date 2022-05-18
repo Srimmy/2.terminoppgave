@@ -18,13 +18,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')  {
         $stmt = "UPDATE ticket set answerer = '$username' where id = '$id'";
         mysqli_query($link, $stmt);
         echo $stmt;
-        //header("location: ".$_POST['url']."");
     } else {
         //fjerner ansvar
         $stmt = "UPDATE ticket set answerer = NULL where id = '$id'";
         echo $stmt;
         mysqli_query($link, $stmt);
-        //header("location: ".$_POST['url']."");
     }
     header("location: ".$_POST['url']."");
     

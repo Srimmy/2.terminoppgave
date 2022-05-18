@@ -16,7 +16,7 @@ $username = "";
 <body>
 
     <!-- navbar -->
-    <?php include("../config/navbar.php")?>
+    <?php include("../config/navbar.php") ?>
 
 
     <div class="whitespace"></div>
@@ -34,7 +34,7 @@ $username = "";
                 //kjører koden hver gang $rad får en ny verdi, altså for hver rad i databasen
                 while ($rad = mysqli_fetch_assoc($result)) {
                     //definerer pathen til filen
-                    $path = $postedPicRoot.$rad['Path'];
+                    $path = $postedPicRoot . $rad['Path'];
                     $usernamePic = $rad['brukernavn'];
                     //elementet som skal vises
                     $bildeEl = "<div class = 'item center pointer' onClick = sendTilProfil('$usernamePic') > 
@@ -57,6 +57,8 @@ $username = "";
 
 
     <div class="whitespace"></div>
+    
+
     <script src="../../script/ui.js"></script>
 </body>
 

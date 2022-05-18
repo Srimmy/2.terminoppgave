@@ -77,7 +77,7 @@ if (isset($_GET['k']) && $_GET['k'] != '') {
 
     </div>
     <script src='../../script/ui.js'></script>
-    <script src='../script/faqSearch.js'></script>
+    <script src='../../script/faqSearch.js'></script>
 </body>
 
 </html>

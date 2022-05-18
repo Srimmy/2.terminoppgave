@@ -18,20 +18,27 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         //feilsøking i brukernavn
         // logikken jeg bruker
         if (empty($_POST['password'])) {
+            //ingen passord skrevet
             $password_err = "Please enter your password";
-        } else if (empty($_POST['newPassword'])) { //funker ikke å legge inn i if password empty || new password empty
+        } else if (empty($_POST['newPassword'])) {
+            //nytt passord er ikke skrevet
             $password_err = "Please enter your new password";
         } else if (!password_verify($password, $_SESSION['password'])) {
+            //feil passord
             $password_err = "Incorrect password";
         } else if (!($_POST['newPassword'] === $_POST['confirmPassword'])) {
+            //nye passordene passer ikke sammen
             $password_err = "Password does not match.";
         } else {
             $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-            $stmt =    "
-            update users set password = '$hashedPassword' where id = '$id';";
-            if (mysqli_multi_query($link, $stmt)) {
+            $sql =    "update users set password = ? where id = ?";
+            $stmt = mysqli_prepare($link, $sql);
+            mysqli_stmt_bind_param($stmt, 'si', $hashedPassword, $id);
+            if (mysqli_stmt_execute($stmt)) {
+                //oppdatert
                 $valid_err = "Successful change!";
             } else {
+                //query eller server feil
                 $valid_err = "Something went wrong. Please try again later.";
             }
         }
@@ -51,6 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                     $username_err = "Username already exists.";
                 }
             } else {
+                //burde gå fint siden man ikke kan bruke < > tags
                 $stmt =    "
                             update users set username = '$newUsername' where id = '$id';
                             update bilder set brukernavn = '$newUsername' where brukernavn = '$username';

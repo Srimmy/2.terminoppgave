@@ -19,7 +19,7 @@ if (isset($_POST['title'])) {
         if ($result = mysqli_query($link, $stmt2)) {
             if ($rad = $rad = mysqli_fetch_assoc(mysqli_query($link, $stmt2)))
             //sender deg til ticket siden
-            header("location: http://localhost/dashboard/terminoppgave/root/costumerSupport/answerTicket.php?id=".$rad['id']."&seeTicket=0");
+            header("location: http://localhost/dashboard/terminoppgave/root/php/costumerSupport/answerTicket.php?id=".$rad['id']."&seeTicket=0");
         }
         // header("location: ../costumerSupport/costumerTickets.php");
     } else {

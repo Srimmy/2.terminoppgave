@@ -29,7 +29,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             <input class="supportTitle" required maxlength="30" name="title" ; type="text" placeholder="Keywords of your issue">
             <label class="supportLabel" for="">Description</label>
             <textarea required class="supportDescription" name="desc" id="" cols="30" rows="10" placeholder="Explain your issue"></textarea>
-            <input type="submit" class = "createButton"value="Send ticket">
+            <input type="submit" class = "submit"value="Send ticket">
         </form>
     </div>
 

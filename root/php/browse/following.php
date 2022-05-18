@@ -12,7 +12,7 @@ $username = $_SESSION["username"];
 $following_err = "";
 
 
-//kjører hvis du trykker på like knappen
+//lik (hjerte) knapp er trykket
 if (isset($_POST['like'])) {
     $bildetIdPOST = $_POST['bildeId'];
     $stmt = mysqli_prepare($link, "SELECT * FROM liktebilderview WHERE liker = ? AND id = ?");

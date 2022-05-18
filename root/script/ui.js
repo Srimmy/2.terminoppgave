@@ -82,12 +82,9 @@ function confirmDelete(username) {
     let confirmAction = confirm('Are you sure you want to delete your account?');
     if (confirmAction) {
         deleteUser(username);
-    } else {
-        console.log("cap");
-    }
+    } 
 }
 function seeTicket(id) {
-    console.log("cap");
     writeForm("../costumerSupport/answerTicket.php", "seeTicketForm", "seeTicket", id, "id", "get");
 }
 

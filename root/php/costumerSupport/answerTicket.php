@@ -14,6 +14,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         //case 1: du har fått GET i URL
         $id = $_GET['id'];
         $stmt  = "select * from ticket WHERE id = '$id'";
+        $result = mysqli_query($link, $stmt);
         if ($rad = mysqli_fetch_assoc($result)) {
             //case a: ticketen finnes
             $title = $rad['keyword'];
@@ -21,7 +22,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
             $asker = $rad['user'];
             $stmt = "SELECT * FROM users WHERE username = '$asker'";
             if ($rad1 = mysqli_fetch_assoc(mysqli_query($link, $stmt))) {
-                $profilePicPath = $profilePicRoot.$rad1['profilePicPath'];
+                $profilePicPath = $profilePicRoot . $rad1['profilePicPath'];
                 break;
             }
         } else {
@@ -100,7 +101,7 @@ $escaped_url = htmlspecialchars($url, ENT_QUOTES, 'UTF-8');
         <div class="row  threadDiv">
             <div class="writer">
                 <div class="ticketPfp">
-                    <img class ='ticketActualPfp'src="<?php echo $profilePicPath ?>" alt="Profile Picture <?php $asker ?>">
+                    <img class='ticketActualPfp' src="<?php echo $profilePicPath ?>" alt="Profile Picture <?php $asker ?>">
                 </div>
             </div>
             <div class="thread">
@@ -122,7 +123,7 @@ $escaped_url = htmlspecialchars($url, ENT_QUOTES, 'UTF-8');
                 echo ' <div class="row  threadDiv">
                 <div class="writer">
                     <div class="ticketPfp">
-                        <img class ="ticketActualPfp" src="' . $profilePicRoot.$replyerInfo['profilePicPath'] . '" alt="Profile Picture ' . $replyer . '">
+                        <img class ="ticketActualPfp" src="' . $profilePicRoot . $replyerInfo['profilePicPath'] . '" alt="Profile Picture ' . $replyer . '">
                     </div>
                 </div>
                 <div class="thread">
@@ -138,7 +139,7 @@ $escaped_url = htmlspecialchars($url, ENT_QUOTES, 'UTF-8');
         <div class="row  threadDiv">
             <div class="writer">
                 <div class="ticketPfp">
-                    <img class = "ticketActualPfp" src="<?php echo $profilePicPath ?>" alt="Profile Picture <?php $asker ?>">
+                    <img class="ticketActualPfp" src="<?php echo $profilePicPath ?>" alt="Profile Picture <?php $asker ?>">
                 </div>
             </div>
             <div class="thread">

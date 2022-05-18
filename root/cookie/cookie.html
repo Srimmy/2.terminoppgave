@@ -1,0 +1,130 @@
+<style>
+    .cookie-container {
+        z-index: 100;
+        position: fixed;
+        bottom: -100%;
+        left: 0;
+        right: 0;
+        background-color: #2f3640;
+        padding: 0 32px;
+        box-shadow: 0 -2px 16 hsl(215, 15%, 22%, 0.39);
+        transition: 400ms;
+    }
+
+    .cookie-container.active {
+        bottom: 0;
+    }
+
+    .cookie-container a,
+    .cookie-container p {
+        color: #f5f6fa;
+    }
+
+    .cookie-btn {
+        background-color: #e84118;
+        border: 0;
+        color: #f5f6fa;
+        padding: 12px 48px;
+        font-size: 1;
+        margin-bottom: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    .TOS-modal {
+        display: none;
+    }
+
+    .TOS-modal.active {
+        display: block;
+        width: 100%;
+        height: 100vh;
+        background: rgb(0, 0, 0, 0.9);
+        z-index: 101;
+        position: fixed;
+    }
+
+    .TOS-content {
+        width: 60vw;
+        height: 80vh;
+        background-color: white;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        overflow-y: auto;
+    }
+
+    .TOS-title {
+        text-align: center;
+    }
+
+    .TOS-title,
+    .TOS-paragraph {
+        font-family: "Roboto", sans-serif;
+        color: black;
+        padding: 36px;
+        line-height: 2;
+    }
+    #TOS-btn {
+        position: absolute;
+        right: 0;
+        margin-right: 36px;
+    }
+</style>
+
+<div class="cookie-container">
+    <p>
+        By using this site you agree to our
+        <a href="#" id='TOS'>Terms and Conditions</a>.
+        Please Accept these before using the site.
+    </p>
+    <button class='cookie-btn'>
+        Accept
+    </button>
+</div>
+<div class="TOS-modal" id='TOSparent'>
+    <div class="TOS-content">
+        <h1 class="TOS-title">
+            Terms Of Service
+
+        </h1>
+        <p class="TOS-paragraph">
+            L-ERA is not responsible for what is seen nor posted on the site.
+            <br> <br>
+            YOU AGREE NOT TO violate any law, contract, intellectual property, or other third-party right; not to commit
+            a tort, and that you are solely responsible for your conduct while on the L-ERA Services
+            L-ERA respects the intellectual property of others and follows the requirements set forth in the Digital
+            Millennium Copyright Act (“DMCA”) and other applicable laws. If you are the copyright owner or agent thereof
+            and believe that content posted on the L-ERA Services infringes upon your copyright, please submit a ticket.
+            <br>
+            <br>
+            In order to open an account, you will be asked to provide us with certain information such as an account
+            name and password.
+            <br><br>
+
+            You are solely responsible for maintaining the confidentiality of your account, your password and for
+            restricting access to your computer. If you permit others to use your account credentials, you agree to
+            these Terms of Service on behalf of all other persons who use the Services under your account or password,
+            and you are responsible for all activities that occur under your account or password. Please make sure the
+            information you provide to Twitch upon registration and at all other times is true, accurate, current, and
+            complete to the best of your knowledge.
+            <br>
+            <br>
+
+            Unless expressly permitted in writing by Twitch, you may not sell, rent, lease, share, or provide access to
+            your account to anyone else, including without limitation, charging anyone for access to administrative
+            rights on your account. Twitch reserves all available legal rights and remedies to prevent unauthorized use
+            of the Twitch Services, including, but not limited to, technological barriers, IP mapping, and, in serious
+            cases, directly contacting your Internet Service Provider (ISP) regarding such unauthorized use.
+
+
+
+        </p>
+        <button class='cookie-btn' id="TOS-btn">
+            Accept
+        </button>
+        <div class="whitespace"></div>
+    </div>
+</div>
+<script src='../../script/cookie.js'></script>

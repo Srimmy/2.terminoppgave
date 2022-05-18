@@ -10,8 +10,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $password = mysqli_real_escape_string($link, $_POST['password']);
     //hvis det begge er fyllt
     if (!empty($username) && !empty($password)) {
-        $stmt = "SELECT * FROM users where username = '$username'";
-        if ($result = mysqli_query($link, $stmt)) {
+        $sql = "SELECT * FROM users where username = ?";
+        $stmt = mysqli_prepare($link, $sql);
+        mysqli_stmt_bind_param($stmt, 's', $username);
+        mysqli_stmt_execute($stmt);
+        if ($result = mysqli_stmt_get_result($stmt)) {
             //henter data i assoc array
             if ($user_data = mysqli_fetch_assoc($result)) {
                 //skjekker om dataen stemmer, funker ikke gjøre om passordet til hashed og teste d

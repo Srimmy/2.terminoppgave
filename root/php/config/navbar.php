@@ -6,7 +6,7 @@ $pongSrc = "../../bilder/htmlBilder/pong.png";
 $logout = "Log Out";
 
 switch (basename($_SERVER['PHP_SELF'])) {
-    //endrer ikon samsvarende med hvilken side det er 
+        //endrer ikon samsvarende med hvilken side det er 
     case "following.php":
         $followingSrc = "../../bilder/htmlBilder/house-reverse.png";
         break;
@@ -22,22 +22,23 @@ switch (basename($_SERVER['PHP_SELF'])) {
         $pongSrc = "../../bilder/htmlBilder/pong-reverse.png";
         break;
     case "faq.php":
-        if(isset($_SESSION["loggedin"])) {
+        if (isset($_SESSION["loggedin"])) {
             $username = $_SESSION['username'];
-        } else{
+        } else {
             $username = '';
             $logout = "Log In";
             $_SESSION['profilePic'] = "../profilbilder/standard.svg";
         }
-
 }
 
 ?>
 <link rel="stylesheet" href="../../css/style.css">
 <div class="navbar">
+    <!--logo-->
     <div class="left-navbar">
         <img src="../../bilder/htmlBilder/logo.svg" alt="logo" class="logo">
     </div>
+    <!--Søkemotor-->
     <form method="GET" class="row searchForm" action='../browse/search.php'>
         <div id="search" style="width: 15vw">
             <img src="../../bilder/htmlBilder/søke.png" id="søkeBildet" alt="">
@@ -45,6 +46,7 @@ switch (basename($_SERVER['PHP_SELF'])) {
         </div>
     </form>
     <div class="right-navbar">
+        <!--Høyre side av navbar-->
         <a class="menu" href="../browse/following.php"><img class="navbar-icon" src="<?php echo $followingSrc; ?>" alt="home"></a>
         <a class="menu" href="../browse/index.php"><img class="navbar-icon" src="<?php echo $homeSrc; ?>" alt="explore"></a>
         <a class="menu" href="../game/pong.php"><img class="navbar-icon" src="<?php echo $pongSrc; ?>" alt="explore"></a>
@@ -92,3 +94,7 @@ switch (basename($_SERVER['PHP_SELF'])) {
         </div>
     </div>
 </div>
+
+<?php
+include('../../cookie/cookie.html');
+?>

@@ -43,13 +43,6 @@ function createTicketEls($queryResult)
             </tr>";
     }
 }
-//       echo " 
-// <div onClick=seeTicket('$id')> 
-// <div class = 'yourTickets'>
-// <p class = 'ticketTitle'> <b>$title</b> </p>
-// <p class = 'ticketDesc'> $desc </p>
-// </div>
-// </div>";
 ?>
 
 <!DOCTYPE html>

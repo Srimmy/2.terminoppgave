@@ -17,8 +17,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $username_err = "Username can only contain letters, numbers and underscores.";
     } else {
         //ser om brukernavnet finnes
-        $stmt = "select * from users WHERE username = '$username'";
-        if ($result = mysqli_query($link, $stmt)) {
+        $sql = "select * from users WHERE username = ?";
+        $stmt = mysqli_prepare($link, $sql);
+        mysqli_stmt_bind_param($stmt, 's', $username);
+        mysqli_stmt_execute($stmt);
+        if ($result = mysqli_stmt_get_result($stmt)) {
             if (mysqli_num_rows($result) > 0) {
                 $username_err = "Username already exists.";
             } else { //Ser om passord er gyldig
@@ -28,8 +31,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $password_err = "Password does not match.";
                 } else {
                     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-                    $stmt = "INSERT INTO users (username, password, profilePicPath) VALUES ('$username', '$hashedPassword', '../profilbilder/standard.svg')";
-                    if (mysqli_query($link, $stmt)) {
+                    $sql = "INSERT INTO users (username, password, profilePicPath) VALUES (?, ?, '../profilbilder/standard.svg')";
+                    $stmt = mysqli_prepare($link, $sql);
+                    mysqli_stmt_bind_param($stmt, 'ss', $username, $hashedPassword);
+                    if (mysqli_stmt_execute($stmt)) {
                         header("location: login.php");
                     } else {
                         echo "Something went wrong. Please try again later.";

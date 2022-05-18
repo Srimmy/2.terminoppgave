@@ -11,11 +11,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     echo "MÅ LEGGE TIL TITLE I STMT OG HELE FAQ POST DRITEN <br>";
     $title = mysqli_real_escape_string($link, $_POST['title']);
     $contents = mysqli_real_escape_string($link, $_POST['contents']);
-    $stmt = "select * from faq WHERE title = '$title'";
-    $result = mysqli_query($link, $stmt);
-    if (mysqli_num_rows($result) == 0) {
-        $stmt = "INSERT INTO faq (title, contents) VALUES ('$title', '$contents')";
-        if ($result = mysqli_query($link, $stmt)) {
+    $sql = "select * from faq WHERE title = ?";
+    $stmt = mysqli_prepare($link, $sql);
+    mysqli_stmt_bind_param($stmt, "s", $title);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_store_result($stmt);
+    if (mysqli_stmt_num_rows($stmt) == 0) {
+        $stmt = mysqli_prepare($link, "INSERT INTO faq (title, contents) VALUES (?, ?)");
+        mysqli_stmt_bind_param($stmt, 'ss', $title, $contents);
+        mysqli_stmt_execute($stmt);
+        if (mysqli_stmt_execute($stmt)) {
             if ($_FILES) {
                 for ($i = 0; $i < count($_FILES['file']['name']); $i++) {
                     //finner navnet til filen, tmp navn, størrelse, om det er en feil og type fil
@@ -43,34 +48,47 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 $fileNameNew = uniqid('', true) . "." . $fileActualExt;
                                 //destinasjon av filer
                                 $fileDestination = $root . $fileNameNew;
-                                $stmt = "insert into faqpic(path, lineNum, title) VALUES ('$fileNameNew', '$i', '$title')";
-                                $result = mysqli_query($link, $stmt);
+                                $sql = "insert into faqpic(path, lineNum, title) VALUES ('$fileNameNew', '$i', ?)";
+                                if ($stmt = mysqli_prepare($link, $sql)) {
+                                    mysqli_stmt_bind_param($stmt, 's', $title);
+                                    if (mysqli_stmt_execute($stmt)) {
+                                        move_uploaded_file($fileTmpName, $fileDestination);
+                                        //variabel for filen som ble sendt med navn 'file'
+                                        $file = $_FILES['file'];
+                                    }
+                                }
                                 //flytter filen til riktig desitnasjon
-                                move_uploaded_file($fileTmpName, $fileDestination);
-                                //variabel for filen som ble sendt med navn 'file'
-                                $file = $_FILES['file'];
+
                             } else {
+                                //for stor fil
                                 $upload_err = "Your file is too large!";
                             }
                         } else {
+                            //noe galt med filen
                             $upload_err = "There was an error uploading your file";
                         }
                     } else {
+                        //feil filtype
                         $upload_err = "You cannot upload files of this type!";
                     }
                 }
             }
         } else {
+            //query feil 
             $upload_err = "Something went wrong, try again later";
         }
     } else {
+        //tittelen finnes
         $upload_err = "Title already exists";
     }
-    $stmt = "SELECT * FROM faq WHERE title = '$title'";
-    $result = mysqli_query($link, $stmt);
-    $rad = mysqli_fetch_assoc($result);
-    $urlTitle = str_replace(' ', '-', $rad['title']);
-    header("location:faqArticle.php?title=$urlTitle");
+    $sql = "SELECT title FROM faq WHERE title = ?";
+    if ($stmt = mysqli_prepare($link, $sql)) {
+        mysqli_stmt_bind_param($stmt, 's', $title);
+        mysqli_stmt_store_result($stmt);
+        mysqli_stmt_bind_result($stmt, $title);
+        $urlTitle = str_replace(' ', '-', $title);
+        header("location:faqArticle.php?title=$urlTitle");
+    }
 }
 
 ?>
@@ -94,7 +112,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <input class="supportTitle" required name="title" ; type="text" placeholder="Article title">
             <label class="supportLabel" for="">Description</label>
             <textarea required class="supportDescription" name="contents" id="" cols="30" rows="10" placeholder="Use * to create new line eg. This is line #1 * This is line #2"></textarea>
-            <input type="number" min='0' width="50" onchange="addInputs()" onkeydown='addInputs()' ; name='pictureAmount' value='0'>
             <!--Skriver inputs fra js-->
             <div id="newInputs"></div>
             <input type="submit" class='input createButton' value="Publish">
@@ -104,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
     <script src='../../script/ui.js'></script>
-    <script src='../script/createFaq.js'></script>
+    <script src='../../script/createFaq.js'></script>
 </body>
 
 </html>
