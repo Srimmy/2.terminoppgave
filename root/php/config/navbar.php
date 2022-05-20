@@ -4,21 +4,28 @@ $followingSrc = "../../bilder/htmlBilder/house.png";
 $homeSrc = "../../bilder/htmlBilder/browse.png";
 $pongSrc = "../../bilder/htmlBilder/pong.png";
 $logout = "Log Out";
+$pfp = "../profilbilder/standard.svg";
+
 
 switch (basename($_SERVER['PHP_SELF'])) {
         //endrer ikon samsvarende med hvilken side det er 
     case "following.php":
+        $pfp = $_SESSION['profilePic'];
         $followingSrc = "../../bilder/htmlBilder/house-reverse.png";
         break;
     case "index.php":
+        $pfp = $_SESSION['profilePic'];
         $homeSrc = "../../bilder/htmlBilder/browse-reverse.png";
         break;
     case "browse.php":
         $homeSrc = "../../bilder/htmlBilder/browse-reverse.png";
         $logout = "Log In";
-        $_SESSION['profilePic'] = "../profilbilder/standard.svg";
+        $pfp = "../../bilder/profilbilder/standard.svg";
         break;
     case "pong.php":
+        if(isset($_SESSION['loggedin'])) {
+            $pfp = $_SESSION['profilePic'];
+        } 
         $pongSrc = "../../bilder/htmlBilder/pong-reverse.png";
         break;
     case "faq.php":
@@ -27,7 +34,6 @@ switch (basename($_SERVER['PHP_SELF'])) {
         } else {
             $username = '';
             $logout = "Log In";
-            $_SESSION['profilePic'] = "../profilbilder/standard.svg";
         }
 }
 
@@ -71,7 +77,7 @@ switch (basename($_SERVER['PHP_SELF'])) {
         </div>
         <a class="menu" href="../costumerSupport/faq.php"><img class="navbar-icon" src="../../bilder/htmlBilder/brukerstotte.svg" alt="explore"></a>
         <div id="pfpRadius" class="dropdownElement pfpRadius">
-            <img class="profilBildet" id="drop" src="<?php echo $_SESSION['profilePic']; ?>" alt="profile picture">
+            <img class="profilBildet" id="drop" src="<?php echo $pfp; ?>" alt="profile picture">
         </div>
 
 

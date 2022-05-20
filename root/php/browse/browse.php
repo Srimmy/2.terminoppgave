@@ -20,10 +20,6 @@ $username = "";
 
 
     <div class="whitespace"></div>
-    <p>
-        <a href="sharePic.php">Share a picture</a>
-    </p>
-
     <!--Bildet feed-->
     <div class="container containerBody">
         <?php
