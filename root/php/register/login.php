@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     if (is_null($user_data['profilePicPath'])) {
                         $_SESSION['profilePic'] = "../profilbilder/standard.svg";
                     } else {
-                        $_SESSION['profilePic'] =  $profilePicRoot.$user_data['profilePicPath'];
+                        $_SESSION['profilePic'] =  $profilePicRoot . $user_data['profilePicPath'];
                     }
 
 
@@ -64,23 +64,24 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     <div class="center">
         <h1>Login</h1>
-        <form action="login.php" method="POST">
+        <form action="login.php" id="loginForm" method="POST">
             <div class="text-field">
-                <input type="text" name = "username"required>
+                <input type="text" name="username" required>
                 <span></span>
                 <label>Username</label>
             </div>
             <div class="text-field">
-                <input type="password" name = "password" required>
+                <input type="password" name="password" required>
                 <span></span>
                 <label>Password</label>
             </div>
             <input type="submit" value="login">
             <p class="signup_link">Don't have an account?<a href="register.php" class="link"> Sign up</a></p>
-
+        </form>
     </div>
-    </form>
 
+
+    <script src=../../script/register.js></script>
 </body>
 
 </html>

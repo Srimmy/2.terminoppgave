@@ -34,7 +34,7 @@ require_once('../config/config.php')
                     //endrer %20% til - i url
                     $urlTitle = str_replace(' ', '-', $rad['title']);
                     //gir GET informasjon
-                    echo "<a href='http://localhost/dashboard/terminoppgave/root/costumerSupport/faqArticle.php?title=" . $urlTitle . "'>" . $rad['title'] . "</a> <br>";
+                    echo "<a href='http://localhost/dashboard/terminoppgave/root/php/costumerSupport/faqArticle.php?title=" . $urlTitle . "'>" . $rad['title'] . "</a> <br>";
                 }
             } ?>
             <div class="bottomWhiteSpace"></div>

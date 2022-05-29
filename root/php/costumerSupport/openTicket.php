@@ -27,6 +27,7 @@ $username = $_SESSION['username'];
 
     <div class="containerBody">
         <div>
+            <h1>Unsolved</h1>
             <table class="ticketTable">
                 <tr>
 
@@ -41,6 +42,58 @@ $username = $_SESSION['username'];
                 <?php
                 //henter alle tickets
                 $stmt = "SELECT * FROM ticket where status != 'solved' ORDER BY created_at asc";
+                if ($result = mysqli_query($link, $stmt)) {
+                    while ($rad = mysqli_fetch_assoc($result)) {
+                        $id = $rad['id'];
+                        $title = $rad['keyword'];
+                        $desc = $rad['description'];
+                        if (strlen($desc) > 25) {
+                            //forkorter slik at description ikke blir for lang
+                            $desc = substr($desc, 0, 22) . '...';
+                        }
+                        $user = $rad['user'];
+                        $answerer = $rad['answerer'];
+                        if (is_null($answerer)) {
+                            $answerer = "-";
+                        }
+                        $priority = $rad['priority'];
+                        echo "
+                            <tr onclick=seeTicket('$id')>
+                                <td>
+                                    #$id
+                                </td>
+                                <td>
+                                    $title
+                                </td>
+                                <td>
+                                    $desc
+                                </td>
+                                <td>
+                                    $user
+                                </td>
+                                <td>
+                                    $answerer
+                                </td>
+                            </tr>";
+                    }
+                }
+                ?>
+            </table>
+            <h1>Solved</h1>
+            <table class="ticketTable">
+                <tr>
+
+                    <th>ID</th>
+                    <th>Subject</th>
+                    <th>Description</th>
+                    <th>Requester</th>
+                    <th>Asignee</th>
+
+                </tr>
+
+                <?php
+                //henter alle tickets
+                $stmt = "SELECT * FROM ticket where status = 'solved' ORDER BY created_at asc";
                 if ($result = mysqli_query($link, $stmt)) {
                     while ($rad = mysqli_fetch_assoc($result)) {
                         $id = $rad['id'];

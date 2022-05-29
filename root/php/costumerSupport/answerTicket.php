@@ -139,7 +139,7 @@ $escaped_url = htmlspecialchars($url, ENT_QUOTES, 'UTF-8');
         <div class="row  threadDiv">
             <div class="writer">
                 <div class="ticketPfp">
-                    <img class="ticketActualPfp" src="<?php echo $profilePicPath ?>" alt="Profile Picture <?php $asker ?>">
+                    <img class="ticketActualPfp" src="<?php echo $_SESSION['profilePic'] ?>" alt="Profile Picture <?php $asker ?>">
                 </div>
             </div>
             <div class="thread">

@@ -38,6 +38,7 @@ function pfpDropdown(e) {
     };
 }
 
+
 document.body.addEventListener('click', searchExpansion);
 
 function searchExpansion(e) {
@@ -67,6 +68,9 @@ function sendTilProfil(username) {
 
     writeForm("../profile/profile.php", "profileForm", "otherProfile", username, "username", "get");
     console.log(username);
+}
+function visBildet(bildeId) {
+    writeForm("../browse/picturemodal.php", "pictureForm", "picture", bildeId, "picId", "GET")
 }
 
 function follow(username) {
@@ -134,7 +138,7 @@ let likeEl = document.getElementsByName('like');
 console.log(likeEl);
 function like(bildeId) {
     invisableEl.innerHTML = ''
-        + '<form action="following.php" method ="POST" id = "likeForm">'
+        + '<form action="../process/like.php" method ="POST" id = "likeForm">'
         + '<input class = "invisable" type="text" name = "bildeId" value=' + bildeId + '>'
         + '<input class = "invisable" type = "text" name = "like" value ="0">'
         + ' </form>';

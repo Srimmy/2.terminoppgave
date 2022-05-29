@@ -64,27 +64,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="center">
         <h1>Register</h1>
-        <form action="register.php" method="POST">
+        <form action="register.php" id="loginForm" method="POST">
             <div class="text-field">
-                <input type="text" name = "username"required>
+                <input type="text" name="username" required>
                 <span></span>
                 <label>Username</label>
             </div>
             <div class="text-field">
-                <input type="password" name = "password" required>
+                <input type="password" name="password" required>
                 <span></span>
                 <label>Password</label>
             </div>
             <div class="text-field">
-                <input type="password" name = "confirmPassword" required>
+                <input type="password" name="confirmPassword" required>
                 <span></span>
                 <label>Confirm Password</label>
             </div>
             <input type="submit" value="Register">
-            <p class="signup_link">Alreayd have an account? <a href="login.php"> Login</a></p>
-
+            <p class="signup_link">Already have an account? <a href="login.php"> Login</a></p>
+        </form>
     </div>
-    </form>
+
 
 </body>
 

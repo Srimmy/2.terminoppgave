@@ -13,7 +13,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $kommentar = $_POST['newComment'];
         $stmt = "INSERT INTO kommentar (kommentar, bildeId, brukernavn) VALUES ('$kommentar', '$bildeId', '$username')";
         mysqli_query($link, $stmt);
-        header("Location: ../browse/following.php");
+        //sender til riktig side
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit;
     }
 
 }

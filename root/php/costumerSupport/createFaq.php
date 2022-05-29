@@ -11,12 +11,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     echo "MÅ LEGGE TIL TITLE I STMT OG HELE FAQ POST DRITEN <br>";
     $title = mysqli_real_escape_string($link, $_POST['title']);
     $contents = mysqli_real_escape_string($link, $_POST['contents']);
+    //query
     $sql = "select * from faq WHERE title = ?";
     $stmt = mysqli_prepare($link, $sql);
     mysqli_stmt_bind_param($stmt, "s", $title);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_store_result($stmt);
-    if (mysqli_stmt_num_rows($stmt) == 0) {
+    if (mysqli_stmt_num_rows($stmt) == 0) { //antall rader er 0
         $stmt = mysqli_prepare($link, "INSERT INTO faq (title, contents) VALUES (?, ?)");
         mysqli_stmt_bind_param($stmt, 'ss', $title, $contents);
         mysqli_stmt_execute($stmt);

@@ -1,8 +1,4 @@
 <?php
-// Initialize the session
-
-
-// ONCLICK FUNKER IKKE HVIS MAN HAR NAME = "X" INNI TAGGET
 //https://www.youtube.com/watch?v=B-ywDE8tBeQ&ab_channel=NickFrostbutter SEARCH ENGINE
 //https://youtu.be/B-ywDE8tBeQ?t=1408
 
@@ -29,10 +25,6 @@ if (isset($_POST['like'])) {
     mysqli_stmt_bind_param($stmt, 'si', $username, $bildetIdPOST);
     mysqli_stmt_execute($stmt);
 }
-//skjekker den høyeste scoren 
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -134,7 +126,7 @@ if (isset($_POST['like'])) {
                 $skrivKommentar = "
                     <div class = 'addComment alignLeft'>  
                         <form method='POST' action='../process/kommentar.php'>
-                            <input class = 'newComment' onkeypress='test($innleggTall)' type='text' name = 'newComment' placeholder='Add a comment..'>
+                            <input class = 'newComment' minlength = '1' maxlength = '20' onkeypress='test($innleggTall)' type='text' name = 'newComment' placeholder='Add a comment..'>
                             <input class = 'invisable' readonly name = 'bildeId' value = '$bildetId'>
                             <input type = 'submit' name = 'submitComment' value = 'Post';>
                         </form>

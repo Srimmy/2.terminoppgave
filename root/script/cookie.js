@@ -11,7 +11,6 @@ TOSBtnEl.addEventListener("click", accepted);
 //viser og skjuler TOS
 TOSEl.addEventListener("click", showTOS);
 TOSmodalEl.addEventListener("click", (e) => {
-    console.log(e.target.id);
     if(e.target.id == 'TOSparent') {
         TOSmodalEl.classList.remove("active");
     }
@@ -26,7 +25,7 @@ function accepted(){
     TOSmodalEl.classList.remove("active");
 }
 
-//delay for cookies
+//cookie popup
 setTimeout(() => {
     if (!localStorage.getItem("cookieBannerDisplayed")) {
         cookieContainerEl.classList.add("active")

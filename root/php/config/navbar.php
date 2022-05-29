@@ -4,17 +4,21 @@ $followingSrc = "../../bilder/htmlBilder/house.png";
 $homeSrc = "../../bilder/htmlBilder/browse.png";
 $pongSrc = "../../bilder/htmlBilder/pong.png";
 $logout = "Log Out";
-$pfp = "../profilbilder/standard.svg";
+if (isset($_SESSION['loggedin'])) {
+    $pfp = $_SESSION['profilePic'];
+} else {
+    $pfp = "../../bilder/profilbilder/standard.svg";
+}
 
 
 switch (basename($_SERVER['PHP_SELF'])) {
         //endrer ikon samsvarende med hvilken side det er 
     case "following.php":
-        $pfp = $_SESSION['profilePic'];
+
         $followingSrc = "../../bilder/htmlBilder/house-reverse.png";
         break;
     case "index.php":
-        $pfp = $_SESSION['profilePic'];
+
         $homeSrc = "../../bilder/htmlBilder/browse-reverse.png";
         break;
     case "browse.php":
@@ -23,9 +27,8 @@ switch (basename($_SERVER['PHP_SELF'])) {
         $pfp = "../../bilder/profilbilder/standard.svg";
         break;
     case "pong.php":
-        if(isset($_SESSION['loggedin'])) {
-            $pfp = $_SESSION['profilePic'];
-        } 
+        if (isset($_SESSION['loggedin'])) {
+        }
         $pongSrc = "../../bilder/htmlBilder/pong-reverse.png";
         break;
     case "faq.php":
@@ -38,7 +41,9 @@ switch (basename($_SERVER['PHP_SELF'])) {
 }
 
 ?>
+
 <link rel="stylesheet" href="../../css/style.css">
+
 <div class="navbar">
     <!--logo-->
     <div class="left-navbar">
@@ -48,7 +53,7 @@ switch (basename($_SERVER['PHP_SELF'])) {
     <form method="GET" class="row searchForm" action='../browse/search.php'>
         <div id="search" style="width: 15vw">
             <img src="../../bilder/htmlBilder/søke.png" id="søkeBildet" alt="">
-            <input class="search" id="searchText" name="k" type="text" class="search" placeholder="Search">
+            <input class="search" id="searchText" name="k" type="text" placeholder="Search">
         </div>
     </form>
     <div class="right-navbar">
@@ -66,7 +71,7 @@ switch (basename($_SERVER['PHP_SELF'])) {
                         <input class="" id="uploadPicture" type="submit" name="submit" value="Upload">
                     </div>
                     <div class="preview">
-                        <img style="display: none;" id="picturePreview">
+                        <img style="display: none;" src="#" id="picturePreview">
                     </div>
 
                     <label for="uploadInput" class="input submit" id="fileUpload"> Select from computer</label>

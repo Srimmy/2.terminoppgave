@@ -39,8 +39,9 @@ $following_err = "";
                     //definerer pathen til filen
                     $path = $postedPicRoot.$rad['Path'];
                     $usernamePic = $rad['brukernavn'];
+                    $bildeId = $rad['id'];
                     //elementet som skal vises
-                    $bildeEl = "<div class = 'item center pointer' onClick = sendTilProfil('$usernamePic') > 
+                    $bildeEl = "<div class = 'item center pointer' onClick = visBildet('$bildeId') > 
                                         <div class = 'bilder'> 
                                         <div class = 'blackbox'>
                                         </div >
